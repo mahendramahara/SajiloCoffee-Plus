@@ -1,0 +1,51 @@
+[
+  {
+    "id": "ord_1001",
+    "userId": "user_alex",
+    "table": 5,
+    "items": [
+      {
+        "productId": "prod_mocha_dark",
+        "size": "regular",
+        "qty": 1,
+        "unitPrice": 5.0,
+        "addons": ["extra-shot"]
+      },
+      {
+        "productId": "prod_espresso_single",
+        "size": "single",
+        "qty": 1,
+        "unitPrice": 2.0,
+        "addons": []
+      }
+    ],
+    "status": "preparing",
+    "placedAt": "2025-08-11T07:45:12Z",
+    "updatedAt": "2025-08-11T07:47:30Z",
+    "subscriptionPerkApplied": true,
+    "subtotal": 7.0,
+    "discount": 0.5,
+    "total": 6.5
+  },
+  {
+    "id": "ord_1002",
+    "userId": "user_mina",
+    "table": 2,
+    "items": [
+      {
+        "productId": "prod_coldbrew_vanilla",
+        "size": "large",
+        "qty": 1,
+        "unitPrice": 5.0,
+        "addons": ["oat-milk"]
+      }
+    ],
+    "status": "served",
+    "placedAt": "2025-08-11T07:50:05Z",
+    "updatedAt": "2025-08-11T07:58:40Z",
+    "subscriptionPerkApplied": false,
+    "subtotal": 5.0,
+    "discount": 0,
+    "total": 5.0
+  }
+]

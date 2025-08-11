@@ -1,0 +1,38 @@
+[
+  {
+    "tableNumber": 1,
+    "capacity": 2,
+    "status": "available",
+    "currentOrderId": null
+  },
+  {
+    "tableNumber": 2,
+    "capacity": 2,
+    "status": "occupied",
+    "currentOrderId": "ord_1002"
+  },
+  {
+    "tableNumber": 3,
+    "capacity": 4,
+    "status": "reserved",
+    "currentOrderId": null
+  },
+  {
+    "tableNumber": 4,
+    "capacity": 4,
+    "status": "available",
+    "currentOrderId": null
+  },
+  {
+    "tableNumber": 5,
+    "capacity": 2,
+    "status": "occupied",
+    "currentOrderId": "ord_1001"
+  },
+  {
+    "tableNumber": 6,
+    "capacity": 6,
+    "status": "available",
+    "currentOrderId": null
+  }
+]

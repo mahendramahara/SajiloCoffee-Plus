@@ -1,0 +1,30 @@
+[
+  {
+    "userId": "user_alex",
+    "generatedAt": "2025-08-11T08:00:00Z",
+    "recommendations": [
+      {
+        "productId": "prod_affogato",
+        "reason": "dessert espresso treat"
+      },
+      {
+        "productId": "prod_flatwhite",
+        "reason": "smooth texture option"
+      }
+    ]
+  },
+  {
+    "userId": "user_mina",
+    "generatedAt": "2025-08-11T08:00:00Z",
+    "recommendations": [
+      {
+        "productId": "prod_matcha_latte",
+        "reason": "iced preference alternative"
+      },
+      {
+        "productId": "prod_cappuccino_classic",
+        "reason": "explore balanced sweetness"
+      }
+    ]
+  }
+]

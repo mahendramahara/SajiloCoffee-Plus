@@ -1,0 +1,78 @@
+[
+  {
+    "id": "user_alex",
+    "name": "Alex Sharma",
+    "email": "alex@example.com",
+    "avatar": "/images/avatars/alex.png",
+    "role": "user",
+    "preferences": {
+      "sweetness": "medium",
+      "strength": "strong",
+      "milk": "dairy",
+      "flavors": ["chocolate", "caramel"],
+      "temperature": "hot"
+    },
+    "subscription": {
+      "planId": "sub_sixmo_pro",
+      "status": "active",
+      "renewAt": "2026-01-10"
+    },
+    "favorites": ["prod_mocha_dark", "prod_cappuccino_classic"],
+    "stats": {
+      "orderCount": 1,
+      "totalSpend": 6.5,
+      "averageOrderValue": 6.5,
+      "lastOrderId": "ord_1001",
+      "lastOrderAt": "2025-08-11T07:45:12Z"
+    },
+    "createdAt": "2025-07-02"
+  },
+  {
+    "id": "user_mina",
+    "name": "Mina Gurung",
+    "email": "mina@example.com",
+    "avatar": "/images/avatars/mina.png",
+    "role": "user",
+    "preferences": {
+      "sweetness": "low",
+      "strength": "medium",
+      "milk": "oat",
+      "flavors": ["vanilla", "citrus"],
+      "temperature": "iced"
+    },
+    "subscription": { "planId": null, "status": "none", "renewAt": null },
+    "favorites": ["prod_coldbrew_vanilla"],
+    "stats": {
+      "orderCount": 1,
+      "totalSpend": 5.0,
+      "averageOrderValue": 5.0,
+      "lastOrderId": "ord_1002",
+      "lastOrderAt": "2025-08-11T07:50:05Z"
+    },
+    "createdAt": "2025-07-15"
+  },
+  {
+    "id": "admin_raj",
+    "name": "Raj Admin",
+    "email": "admin@sajilocoffee.plus",
+    "avatar": "/images/avatars/raj.png",
+    "role": "admin",
+    "preferences": {
+      "sweetness": "low",
+      "strength": "strong",
+      "milk": "none",
+      "flavors": ["dark-chocolate"],
+      "temperature": "hot"
+    },
+    "subscription": null,
+    "favorites": [],
+    "stats": {
+      "orderCount": 0,
+      "totalSpend": 0,
+      "averageOrderValue": 0,
+      "lastOrderId": null,
+      "lastOrderAt": null
+    },
+    "createdAt": "2025-06-20"
+  }
+]

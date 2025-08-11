@@ -1,0 +1,123 @@
+[
+  {
+    "id": "prod_espresso_single",
+    "name": "Single Espresso Shot",
+    "slug": "single-espresso-shot",
+    "description": "Rich, intense single shot espresso with caramel crema.",
+    "category": "espresso",
+    "price": 2.0,
+    "sizes": [
+      { "size": "single", "price": 2.0 },
+      { "size": "double", "price": 3.2 }
+    ],
+    "image": "/images/products/espresso-single.jpg",
+    "available": true,
+    "ratingAverage": 4.7,
+    "ratingCount": 12,
+    "tags": ["quick", "classic"]
+  },
+  {
+    "id": "prod_cappuccino_classic",
+    "name": "Classic Cappuccino",
+    "slug": "classic-cappuccino",
+    "description": "Balanced espresso with silky microfoam and a dusting of cocoa.",
+    "category": "milk",
+    "price": 3.5,
+    "sizes": [
+      { "size": "small", "price": 3.5 },
+      { "size": "regular", "price": 4.0 },
+      { "size": "large", "price": 4.8 }
+    ],
+    "image": "/images/products/cappuccino.jpg",
+    "available": true,
+    "ratingAverage": 4.8,
+    "ratingCount": 18,
+    "tags": ["creamy", "popular"]
+  },
+  {
+    "id": "prod_flatwhite",
+    "name": "Flat White",
+    "slug": "flat-white",
+    "description": "Velvety texture with higher espresso to milk ratio for a stronger coffee presence.",
+    "category": "milk",
+    "price": 3.8,
+    "sizes": [
+      { "size": "regular", "price": 3.8 },
+      { "size": "large", "price": 4.6 }
+    ],
+    "image": "/images/products/flat-white.jpg",
+    "available": true,
+    "ratingAverage": 4.6,
+    "ratingCount": 9,
+    "tags": ["smooth", "balanced"]
+  },
+  {
+    "id": "prod_coldbrew_vanilla",
+    "name": "Vanilla Cold Brew",
+    "slug": "vanilla-cold-brew",
+    "description": "Slow-steeped cold brew lightly sweetened with natural vanilla.",
+    "category": "cold",
+    "price": 4.2,
+    "sizes": [
+      { "size": "regular", "price": 4.2 },
+      { "size": "large", "price": 5.0 }
+    ],
+    "image": "/images/products/cold-brew-vanilla.jpg",
+    "available": true,
+    "ratingAverage": 4.5,
+    "ratingCount": 7,
+    "tags": ["refreshing", "summer"]
+  },
+  {
+    "id": "prod_mocha_dark",
+    "name": "Dark Chocolate Mocha",
+    "slug": "dark-chocolate-mocha",
+    "description": "Espresso blended with steamed milk and premium dark chocolate.",
+    "category": "specialty",
+    "price": 4.5,
+    "sizes": [
+      { "size": "small", "price": 4.5 },
+      { "size": "regular", "price": 5.0 },
+      { "size": "large", "price": 5.8 }
+    ],
+    "image": "/images/products/mocha-dark.jpg",
+    "available": true,
+    "ratingAverage": 4.9,
+    "ratingCount": 22,
+    "tags": ["indulgent", "sweet"]
+  },
+  {
+    "id": "prod_matcha_latte",
+    "name": "Iced Matcha Latte",
+    "slug": "iced-matcha-latte",
+    "description": "Ceremonial grade matcha shaken with chilled milk for a clean energy boost.",
+    "category": "alt",
+    "price": 4.8,
+    "sizes": [
+      { "size": "regular", "price": 4.8 },
+      { "size": "large", "price": 5.6 }
+    ],
+    "image": "/images/products/matcha-latte.jpg",
+    "available": true,
+    "ratingAverage": 4.4,
+    "ratingCount": 5,
+    "tags": ["green", "tea", "cool"]
+  },
+  {
+    "id": "prod_affogato",
+    "name": "Affogato",
+    "slug": "affogato",
+    "description": "Silky vanilla gelato drenched in a shot of hot espresso.",
+    "category": "dessert",
+    "price": 5.2,
+    "sizes": [
+      { "size": "single", "price": 5.2 },
+      { "size": "double", "price": 6.2 }
+    ],
+    "image": "/images/products/affogato.jpg",
+    "available": false,
+    "ratingAverage": 4.9,
+    "ratingCount": 4,
+    "tags": ["dessert", "treat"]
+  }
+]

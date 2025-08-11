@@ -1,0 +1,26 @@
+[
+  {
+    "id": "rate_1",
+    "userId": "user_alex",
+    "productId": "prod_mocha_dark",
+    "rating": 5,
+    "review": "Rich and perfectly balanced.",
+    "createdAt": "2025-08-11T07:46:00Z"
+  },
+  {
+    "id": "rate_2",
+    "userId": "user_mina",
+    "productId": "prod_coldbrew_vanilla",
+    "rating": 4,
+    "review": "Refreshing, could be a little bolder.",
+    "createdAt": "2025-08-11T07:55:00Z"
+  },
+  {
+    "id": "rate_3",
+    "userId": "user_alex",
+    "productId": "prod_cappuccino_classic",
+    "rating": 5,
+    "review": "Silky foam and great flavor.",
+    "createdAt": "2025-08-10T09:15:00Z"
+  }
+]

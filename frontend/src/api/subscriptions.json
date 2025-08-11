@@ -1,0 +1,65 @@
+[
+  {
+    "id": "sub_monthly_basic",
+    "name": "Monthly Explorer",
+    "cycle": "monthly",
+    "price": 12,
+    "currency": "USD",
+    "features": [
+      "1 free flavor add-on weekly",
+      "Priority seating (weekday)",
+      "Private space 2 hrs/mo",
+      "Sticker pack welcome",
+      "Taste profile tracking"
+    ],
+    "perks": {
+      "freePowderGrams": 50,
+      "indoorVisitsPerMonth": 4,
+      "privateSpaceHours": 2
+    },
+    "popular": false
+  },
+  {
+    "id": "sub_sixmo_pro",
+    "name": "6-Month Enthusiast",
+    "cycle": "6-month",
+    "price": 60,
+    "currency": "USD",
+    "features": [
+      "2 free flavor add-ons weekly",
+      "Priority seating all week",
+      "Private space 10 hrs/6mo",
+      "Quarterly premium sample",
+      "Advanced recommendations"
+    ],
+    "perks": {
+      "freePowderGrams": 400,
+      "indoorVisitsPerMonth": 12,
+      "privateSpaceHours": 10
+    },
+    "popular": true,
+    "savingsPercentVsMonthly": 16.7
+  },
+  {
+    "id": "sub_annual_elite",
+    "name": "Annual Connoisseur",
+    "cycle": "annual",
+    "price": 110,
+    "currency": "USD",
+    "features": [
+      "Unlimited flavor add-ons",
+      "Reserved seating",
+      "Private space 3 hrs/mo",
+      "Monthly premium sample",
+      "Exclusive events",
+      "Priority support"
+    ],
+    "perks": {
+      "freePowderGrams": 1000,
+      "indoorVisitsPerMonth": 20,
+      "privateSpaceHours": 36
+    },
+    "popular": true,
+    "savingsPercentVsMonthly": 23.6
+  }
+]
