@@ -1,15 +1,15 @@
 [
   {
-    "id": "sub_monthly_basic",
-    "name": "Monthly Explorer",
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "name": "Pahad Explorer (Monthly)",
     "cycle": "monthly",
-    "price": 12,
-    "currency": "USD",
+    "price": 1200,
+    "currency": "NPR",
     "features": [
-      "1 free flavor add-on weekly",
-      "Priority seating (weekday)",
-      "Private space 2 hrs/mo",
-      "Sticker pack welcome",
+      "1 free masala add-on weekly",
+      "Priority seating on weekdays",
+      "Private mountain view space 2 hrs/mo",
+      "Welcome khada and sticker pack",
       "Taste profile tracking"
     ],
     "perks": {
@@ -17,20 +17,22 @@
       "indoorVisitsPerMonth": 4,
       "privateSpaceHours": 2
     },
-    "popular": false
+    "popular": false,
+    "createdAt": "2025-01-10T08:00:00Z",
+    "updatedAt": "2025-07-15T10:30:00Z"
   },
   {
-    "id": "sub_sixmo_pro",
-    "name": "6-Month Enthusiast",
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d480",
+    "name": "Himalayan Enthusiast (6-Month)",
     "cycle": "6-month",
-    "price": 60,
-    "currency": "USD",
+    "price": 6000,
+    "currency": "NPR",
     "features": [
-      "2 free flavor add-ons weekly",
+      "2 free spice add-ons weekly",
       "Priority seating all week",
       "Private space 10 hrs/6mo",
-      "Quarterly premium sample",
-      "Advanced recommendations"
+      "Quarterly Nepali coffee sample",
+      "Advanced taste recommendations"
     ],
     "perks": {
       "freePowderGrams": 400,
@@ -38,20 +40,22 @@
       "privateSpaceHours": 10
     },
     "popular": true,
-    "savingsPercentVsMonthly": 16.7
+    "savingsPercentVsMonthly": 16.7,
+    "createdAt": "2025-01-10T08:05:00Z",
+    "updatedAt": "2025-07-15T10:35:00Z"
   },
   {
-    "id": "sub_annual_elite",
-    "name": "Annual Connoisseur",
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d481",
+    "name": "Everest Connoisseur (Annual)",
     "cycle": "annual",
-    "price": 110,
-    "currency": "USD",
+    "price": 11000,
+    "currency": "NPR",
     "features": [
       "Unlimited flavor add-ons",
-      "Reserved seating",
+      "Reserved seating all week",
       "Private space 3 hrs/mo",
-      "Monthly premium sample",
-      "Exclusive events",
+      "Monthly premium mountain coffee",
+      "Exclusive festival events access",
       "Priority support"
     ],
     "perks": {
@@ -60,6 +64,8 @@
       "privateSpaceHours": 36
     },
     "popular": true,
-    "savingsPercentVsMonthly": 23.6
+    "savingsPercentVsMonthly": 23.6,
+    "createdAt": "2025-01-10T08:10:00Z",
+    "updatedAt": "2025-07-15T10:40:00Z"
   }
 ]

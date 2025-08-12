@@ -1,21 +1,21 @@
 [
   {
-    "id": "ord_1001",
-    "userId": "user_alex",
+    "id": "123e4567-e89b-12d3-a456-426614174001",
+    "userId": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
     "table": 5,
     "items": [
       {
-        "productId": "prod_mocha_dark",
+        "productId": "550e8400-e29b-41d4-a716-446655440005",
         "size": "regular",
         "qty": 1,
-        "unitPrice": 5.0,
-        "addons": ["extra-shot"]
+        "unitPrice": 480,
+        "addons": ["extra-cardamom"]
       },
       {
-        "productId": "prod_espresso_single",
+        "productId": "550e8400-e29b-41d4-a716-446655440001",
         "size": "single",
         "qty": 1,
-        "unitPrice": 2.0,
+        "unitPrice": 180,
         "addons": []
       }
     ],
@@ -23,29 +23,29 @@
     "placedAt": "2025-08-11T07:45:12Z",
     "updatedAt": "2025-08-11T07:47:30Z",
     "subscriptionPerkApplied": true,
-    "subtotal": 7.0,
-    "discount": 0.5,
-    "total": 6.5
+    "subtotal": 660,
+    "discount": 40,
+    "total": 620
   },
   {
-    "id": "ord_1002",
-    "userId": "user_mina",
+    "id": "123e4567-e89b-12d3-a456-426614174002",
+    "userId": "6ba7b810-9dad-11d1-80b4-00c04fd430c9",
     "table": 2,
     "items": [
       {
-        "productId": "prod_coldbrew_vanilla",
+        "productId": "550e8400-e29b-41d4-a716-446655440004",
         "size": "large",
         "qty": 1,
-        "unitPrice": 5.0,
-        "addons": ["oat-milk"]
+        "unitPrice": 470,
+        "addons": ["plant-milk"]
       }
     ],
     "status": "served",
     "placedAt": "2025-08-11T07:50:05Z",
     "updatedAt": "2025-08-11T07:58:40Z",
     "subscriptionPerkApplied": false,
-    "subtotal": 5.0,
-    "discount": 0,
-    "total": 5.0
+    "subtotal": 470,
+    "discount": 80,
+    "total": 390
   }
 ]

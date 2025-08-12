@@ -1,0 +1,130 @@
+[
+  {
+    "id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+    "name": "Krishna Bhattarai",
+    "email": "admin@sajilocoffee.plus",
+    "avatar": "/images/avatars/krishna.png",
+    "role": "admin",
+    "permissions": {
+      "products": {
+        "read": true,
+        "create": true,
+        "update": true,
+        "delete": true,
+        "bulkActions": true
+      },
+      "orders": {
+        "read": true,
+        "create": false,
+        "update": true,
+        "delete": true,
+        "refund": true,
+        "statusChange": true
+      },
+      "users": {
+        "read": true,
+        "create": false,
+        "update": true,
+        "delete": false,
+        "suspend": true,
+        "viewStats": true
+      },
+      "admins": {
+        "read": true,
+        "create": true,
+        "update": true,
+        "delete": true
+      },
+      "subscriptions": {
+        "read": true,
+        "create": true,
+        "update": true,
+        "delete": false,
+        "analytics": true
+      },
+      "analytics": {
+        "sales": true,
+        "products": true,
+        "users": true,
+        "revenue": true,
+        "export": true
+      },
+      "settings": {
+        "cafe": true,
+        "tables": true,
+        "pricing": true,
+        "notifications": true
+      }
+    },
+    "lastLogin": "2025-08-11T06:30:00Z",
+    "createdAt": "2025-06-20T09:00:00Z",
+    "updatedAt": "2025-08-11T06:30:00Z",
+    "isActive": true,
+    "department": "Operations",
+    "employeeId": "SCF001"
+  },
+  {
+    "id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6e",
+    "name": "Asha Gurung",
+    "email": "manager@sajilocoffee.plus",
+    "avatar": "/images/avatars/asha.png",
+    "role": "manager",
+    "permissions": {
+      "products": {
+        "read": true,
+        "create": true,
+        "update": true,
+        "delete": false,
+        "bulkActions": false
+      },
+      "orders": {
+        "read": true,
+        "create": false,
+        "update": true,
+        "delete": false,
+        "refund": false,
+        "statusChange": true
+      },
+      "users": {
+        "read": true,
+        "create": false,
+        "update": false,
+        "delete": false,
+        "suspend": false,
+        "viewStats": true
+      },
+      "admins": {
+        "read": true,
+        "create": false,
+        "update": false,
+        "delete": false
+      },
+      "subscriptions": {
+        "read": true,
+        "create": false,
+        "update": false,
+        "delete": false,
+        "analytics": true
+      },
+      "analytics": {
+        "sales": true,
+        "products": true,
+        "users": false,
+        "revenue": false,
+        "export": false
+      },
+      "settings": {
+        "cafe": false,
+        "tables": true,
+        "pricing": false,
+        "notifications": false
+      }
+    },
+    "lastLogin": "2025-08-11T08:15:00Z",
+    "createdAt": "2025-07-01T10:00:00Z",
+    "updatedAt": "2025-08-11T08:15:00Z",
+    "isActive": true,
+    "department": "Customer Service",
+    "employeeId": "SCF002"
+  }
+]

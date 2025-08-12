@@ -1,29 +1,29 @@
 [
   {
-    "userId": "user_alex",
+    "userId": "user_rajesh",
     "generatedAt": "2025-08-11T08:00:00Z",
     "recommendations": [
       {
-        "productId": "prod_affogato",
-        "reason": "dessert espresso treat"
+        "productId": "prod_mustang_special",
+        "reason": "traditional Nepali coffee experience"
       },
       {
-        "productId": "prod_flatwhite",
-        "reason": "smooth texture option"
+        "productId": "prod_everest_latte",
+        "reason": "smooth texture with local buffalo milk"
       }
     ]
   },
   {
-    "userId": "user_mina",
+    "userId": "user_sita",
     "generatedAt": "2025-08-11T08:00:00Z",
     "recommendations": [
       {
-        "productId": "prod_matcha_latte",
-        "reason": "iced preference alternative"
+        "productId": "prod_chitwan_green_tea",
+        "reason": "healthy green tea option from Chitwan"
       },
       {
-        "productId": "prod_cappuccino_classic",
-        "reason": "explore balanced sweetness"
+        "productId": "prod_kathmandu_cappuccino",
+        "reason": "explore creamy spiced cappuccino"
       }
     ]
   }

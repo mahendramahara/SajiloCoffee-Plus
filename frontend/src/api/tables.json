@@ -9,7 +9,7 @@
     "tableNumber": 2,
     "capacity": 2,
     "status": "occupied",
-    "currentOrderId": "ord_1002"
+    "currentOrderId": "123e4567-e89b-12d3-a456-426614174002"
   },
   {
     "tableNumber": 3,
@@ -27,7 +27,7 @@
     "tableNumber": 5,
     "capacity": 2,
     "status": "occupied",
-    "currentOrderId": "ord_1001"
+    "currentOrderId": "123e4567-e89b-12d3-a456-426614174001"
   },
   {
     "tableNumber": 6,

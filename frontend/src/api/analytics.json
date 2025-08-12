@@ -1,0 +1,347 @@
+{
+  "salesData": {
+    "daily": [
+      {
+        "date": "2025-08-05",
+        "revenue": 15680,
+        "orders": 32,
+        "customers": 28
+      },
+      {
+        "date": "2025-08-06",
+        "revenue": 18920,
+        "orders": 41,
+        "customers": 35
+      },
+      {
+        "date": "2025-08-07",
+        "revenue": 22340,
+        "orders": 48,
+        "customers": 42
+      },
+      {
+        "date": "2025-08-08",
+        "revenue": 19750,
+        "orders": 39,
+        "customers": 33
+      },
+      {
+        "date": "2025-08-09",
+        "revenue": 25890,
+        "orders": 54,
+        "customers": 47
+      },
+      {
+        "date": "2025-08-10",
+        "revenue": 28640,
+        "orders": 62,
+        "customers": 51
+      },
+      {
+        "date": "2025-08-11",
+        "revenue": 31250,
+        "orders": 67,
+        "customers": 58
+      }
+    ],
+    "weekly": [
+      {
+        "week": "Week 1",
+        "revenue": 125680,
+        "orders": 287,
+        "growth": 12.5
+      },
+      {
+        "week": "Week 2",
+        "revenue": 142360,
+        "orders": 324,
+        "growth": 18.2
+      },
+      {
+        "week": "Week 3",
+        "revenue": 156890,
+        "orders": 358,
+        "growth": 15.4
+      },
+      {
+        "week": "Week 4",
+        "revenue": 171250,
+        "orders": 389,
+        "growth": 21.8
+      }
+    ],
+    "monthly": [
+      {
+        "month": "May 2025",
+        "revenue": 485600,
+        "orders": 1245,
+        "growth": 8.3
+      },
+      {
+        "month": "Jun 2025",
+        "revenue": 523400,
+        "orders": 1387,
+        "growth": 12.7
+      },
+      {
+        "month": "Jul 2025",
+        "revenue": 598750,
+        "orders": 1524,
+        "growth": 18.2
+      },
+      {
+        "month": "Aug 2025",
+        "revenue": 642180,
+        "orders": 1658,
+        "growth": 22.1
+      }
+    ]
+  },
+  "productPerformance": [
+    {
+      "id": 1,
+      "name": "Himalayan Espresso",
+      "category": "Coffee",
+      "revenue": 45680,
+      "unitsSold": 1256,
+      "growth": 15.2,
+      "profit": 18270,
+      "rating": 4.8
+    },
+    {
+      "id": 2,
+      "name": "Everest Americano",
+      "category": "Coffee",
+      "revenue": 38920,
+      "unitsSold": 1089,
+      "growth": 12.8,
+      "profit": 15568,
+      "rating": 4.6
+    },
+    {
+      "id": 3,
+      "name": "Sherpa Mocha",
+      "category": "Specialty",
+      "revenue": 32450,
+      "unitsSold": 758,
+      "growth": 22.4,
+      "profit": 16225,
+      "rating": 4.9
+    },
+    {
+      "id": 4,
+      "name": "Kathmandu Cold Brew",
+      "category": "Cold Coffee",
+      "revenue": 28640,
+      "unitsSold": 642,
+      "growth": 18.7,
+      "profit": 14320,
+      "rating": 4.7
+    },
+    {
+      "id": 5,
+      "name": "Dal Bhat Set",
+      "category": "Food",
+      "revenue": 25890,
+      "unitsSold": 485,
+      "growth": 8.9,
+      "profit": 10356,
+      "rating": 4.5
+    },
+    {
+      "id": 6,
+      "name": "Newari Cappuccino",
+      "category": "Specialty",
+      "revenue": 22340,
+      "unitsSold": 567,
+      "growth": 25.1,
+      "profit": 11170,
+      "rating": 4.8
+    },
+    {
+      "id": 7,
+      "name": "Momo Platter",
+      "category": "Food",
+      "revenue": 19750,
+      "unitsSold": 328,
+      "growth": 14.6,
+      "profit": 9875,
+      "rating": 4.6
+    },
+    {
+      "id": 8,
+      "name": "Rhododendron Tea",
+      "category": "Tea",
+      "revenue": 15680,
+      "unitsSold": 892,
+      "growth": 6.2,
+      "profit": 7840,
+      "rating": 4.4
+    }
+  ],
+  "customerAnalytics": {
+    "demographics": {
+      "ageGroups": [
+        { "range": "18-25", "count": 156, "percentage": 28.5 },
+        { "range": "26-35", "count": 189, "percentage": 34.6 },
+        { "range": "36-45", "count": 124, "percentage": 22.7 },
+        { "range": "46-55", "count": 58, "percentage": 10.6 },
+        { "range": "55+", "count": 19, "percentage": 3.6 }
+      ],
+      "locations": [
+        { "area": "Thamel", "customers": 125, "percentage": 22.8 },
+        { "area": "Patan", "customers": 98, "percentage": 18.0 },
+        { "area": "Bhaktapur", "customers": 87, "percentage": 15.9 },
+        { "area": "Kirtipur", "customers": 76, "percentage": 13.9 },
+        { "area": "Others", "customers": 160, "percentage": 29.4 }
+      ]
+    },
+    "behavior": {
+      "averageOrderValue": 462,
+      "orderFrequency": 2.8,
+      "customerLifetimeValue": 2850,
+      "retentionRate": 78.5,
+      "newCustomersThisMonth": 89,
+      "returningCustomers": 423
+    }
+  },
+  "notifications": [
+    {
+      "id": 1,
+      "type": "order",
+      "title": "New Order Received",
+      "message": "Order #ORD-2025-0847 from Rajesh Shrestha - ₨850",
+      "timestamp": "2025-08-11T14:25:00Z",
+      "read": false,
+      "priority": "normal",
+      "icon": "shopping-cart"
+    },
+    {
+      "id": 2,
+      "type": "inventory",
+      "title": "Low Stock Alert",
+      "message": "Himalayan Espresso beans running low (5 kg remaining)",
+      "timestamp": "2025-08-11T13:45:00Z",
+      "read": false,
+      "priority": "high",
+      "icon": "exclamation-triangle"
+    },
+    {
+      "id": 3,
+      "type": "user",
+      "title": "New Customer Registration",
+      "message": "Sita Gurung joined as a new customer",
+      "timestamp": "2025-08-11T12:30:00Z",
+      "read": true,
+      "priority": "normal",
+      "icon": "user-plus"
+    },
+    {
+      "id": 4,
+      "type": "subscription",
+      "title": "Subscription Renewed",
+      "message": "Premium plan renewed by Bikash Tamang",
+      "timestamp": "2025-08-11T11:15:00Z",
+      "read": true,
+      "priority": "normal",
+      "icon": "crown"
+    },
+    {
+      "id": 5,
+      "type": "payment",
+      "title": "Payment Successful",
+      "message": "Payment of ₨1,250 received for Order #ORD-2025-0846",
+      "timestamp": "2025-08-11T10:45:00Z",
+      "read": true,
+      "priority": "normal",
+      "icon": "credit-card"
+    },
+    {
+      "id": 6,
+      "type": "review",
+      "title": "New Review",
+      "message": "5-star review for Sherpa Mocha by Priya Maharjan",
+      "timestamp": "2025-08-11T09:30:00Z",
+      "read": true,
+      "priority": "low",
+      "icon": "star"
+    },
+    {
+      "id": 7,
+      "type": "system",
+      "title": "System Maintenance",
+      "message": "Scheduled maintenance completed successfully",
+      "timestamp": "2025-08-11T02:00:00Z",
+      "read": true,
+      "priority": "low",
+      "icon": "tools"
+    },
+    {
+      "id": 8,
+      "type": "order",
+      "title": "Order Completed",
+      "message": "Order #ORD-2025-0845 delivered to Ram Bahadur",
+      "timestamp": "2025-08-10T18:20:00Z",
+      "read": true,
+      "priority": "normal",
+      "icon": "check-circle"
+    }
+  ],
+  "recentActivity": [
+    {
+      "id": 1,
+      "action": "order_placed",
+      "description": "New order from Rajesh Shrestha",
+      "amount": 850,
+      "timestamp": "2025-08-11T14:25:00Z",
+      "user": "Rajesh Shrestha",
+      "icon": "shopping-cart",
+      "color": "success"
+    },
+    {
+      "id": 2,
+      "action": "user_registered",
+      "description": "New customer registration",
+      "timestamp": "2025-08-11T12:30:00Z",
+      "user": "Sita Gurung",
+      "icon": "user-plus",
+      "color": "primary"
+    },
+    {
+      "id": 3,
+      "action": "subscription_renewed",
+      "description": "Premium subscription renewed",
+      "amount": 1200,
+      "timestamp": "2025-08-11T11:15:00Z",
+      "user": "Bikash Tamang",
+      "icon": "crown",
+      "color": "warning"
+    },
+    {
+      "id": 4,
+      "action": "product_trending",
+      "description": "Sherpa Mocha gaining popularity",
+      "timestamp": "2025-08-11T09:30:00Z",
+      "icon": "trending-up",
+      "color": "info"
+    },
+    {
+      "id": 5,
+      "action": "inventory_alert",
+      "description": "Low stock: Himalayan Espresso",
+      "timestamp": "2025-08-11T08:45:00Z",
+      "icon": "exclamation-triangle",
+      "color": "danger"
+    }
+  ],
+  "dashboardStats": {
+    "totalRevenue": 642180,
+    "totalOrders": 1658,
+    "totalCustomers": 546,
+    "activeSubscriptions": 89,
+    "avgOrderValue": 387,
+    "conversionRate": 3.2,
+    "customerSatisfaction": 4.7,
+    "monthlyGrowth": 22.1
+  }
+}

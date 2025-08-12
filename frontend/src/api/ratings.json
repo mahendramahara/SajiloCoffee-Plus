@@ -1,26 +1,26 @@
 [
   {
     "id": "rate_1",
-    "userId": "user_alex",
-    "productId": "prod_mocha_dark",
+    "userId": "user_rajesh",
+    "productId": "prod_sherpa_mocha",
     "rating": 5,
-    "review": "Rich and perfectly balanced.",
+    "review": "Excellent Sherpa-style mocha with perfect cardamom balance.",
     "createdAt": "2025-08-11T07:46:00Z"
   },
   {
     "id": "rate_2",
-    "userId": "user_mina",
-    "productId": "prod_coldbrew_vanilla",
+    "userId": "user_sita",
+    "productId": "prod_pokhara_coldbrew",
     "rating": 4,
-    "review": "Refreshing, could be a little bolder.",
+    "review": "Refreshing like Pokhara lakeside breeze, could be stronger.",
     "createdAt": "2025-08-11T07:55:00Z"
   },
   {
     "id": "rate_3",
-    "userId": "user_alex",
-    "productId": "prod_cappuccino_classic",
+    "userId": "user_rajesh",
+    "productId": "prod_kathmandu_cappuccino",
     "rating": 5,
-    "review": "Silky foam and great flavor.",
+    "review": "Reminds me of Kathmandu mornings with perfect spice blend.",
     "createdAt": "2025-08-10T09:15:00Z"
   }
 ]
