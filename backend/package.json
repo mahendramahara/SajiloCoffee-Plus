@@ -1,0 +1,43 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "web-based coffee shop platform that lets customers easily order coffee online, subscribe for regular deliveries, and get personalized recommendations based on their taste preferences.",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest",
+    "start": "nodemon main.js",
+    "dev": "nodemon main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahendramahara/SajiloCoffee-Plus.git"
+  },
+  "keywords": [
+    "SajiloCoffee",
+    "SajiloCoffee-Plus"
+  ],
+  "author": "mahendramahara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mahendramahara/SajiloCoffee-Plus/issues"
+  },
+  "homepage": "https://github.com/mahendramahara/SajiloCoffee-Plus#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.17.1",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "nodemailer": "^7.0.5",
+    "nodemon": "^3.1.10",
+    "stripe": "^18.4.0",
+    "uuid": "^11.1.0"
+  }
+}
