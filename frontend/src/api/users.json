@@ -1,0 +1,59 @@
+[
+  {
+    "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+    "name": "Rajesh Shrestha",
+    "email": "rajesh@example.com",
+    "avatar": "/images/avatars/rajesh.png",
+    "role": "user",
+    "preferences": {
+      "sweetness": "medium",
+      "strength": "strong",
+      "milk": "buffalo",
+      "flavors": ["chocolate", "cardamom"],
+      "temperature": "hot"
+    },
+    "subscription": {
+      "planId": "f47ac10b-58cc-4372-a567-0e02b2c3d480",
+      "status": "active",
+      "renewAt": "2026-01-10"
+    },
+    "favorites": [
+      "550e8400-e29b-41d4-a716-446655440005",
+      "550e8400-e29b-41d4-a716-446655440002"
+    ],
+    "stats": {
+      "orderCount": 1,
+      "totalSpend": 620,
+      "averageOrderValue": 620,
+      "lastOrderId": "123e4567-e89b-12d3-a456-426614174001",
+      "lastOrderAt": "2025-08-11T07:45:12Z"
+    },
+    "createdAt": "2025-07-02T10:00:00Z",
+    "updatedAt": "2025-08-11T07:45:12Z"
+  },
+  {
+    "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c9",
+    "name": "Sita Tamang",
+    "email": "sita@example.com",
+    "avatar": "/images/avatars/sita.png",
+    "role": "user",
+    "preferences": {
+      "sweetness": "low",
+      "strength": "medium",
+      "milk": "plant-based",
+      "flavors": ["honey", "green-tea"],
+      "temperature": "cold"
+    },
+    "subscription": { "planId": null, "status": "none", "renewAt": null },
+    "favorites": ["550e8400-e29b-41d4-a716-446655440004"],
+    "stats": {
+      "orderCount": 1,
+      "totalSpend": 390,
+      "averageOrderValue": 390,
+      "lastOrderId": "123e4567-e89b-12d3-a456-426614174002",
+      "lastOrderAt": "2025-08-11T07:50:05Z"
+    },
+    "createdAt": "2025-07-15T14:30:00Z",
+    "updatedAt": "2025-08-11T07:50:05Z"
+  }
+]

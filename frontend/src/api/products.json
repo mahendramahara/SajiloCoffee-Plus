@@ -1,0 +1,137 @@
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "name": "Himalayan Espresso",
+    "slug": "himalayan-espresso",
+    "description": "Rich espresso blend from high-altitude Nepali coffee beans with earthy notes.",
+    "category": "espresso",
+    "price": 180,
+    "sizes": [
+      { "size": "single", "price": 180 },
+      { "size": "double", "price": 280 }
+    ],
+    "image": "/images/products/himalayan-espresso.jpg",
+    "available": true,
+    "ratingAverage": 4.7,
+    "ratingCount": 12,
+    "tags": ["mountain-grown", "strong"],
+    "createdAt": "2025-01-15T10:30:00Z",
+    "updatedAt": "2025-08-01T14:20:00Z"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440002",
+    "name": "Kathmandu Cappuccino",
+    "slug": "kathmandu-cappuccino",
+    "description": "Creamy cappuccino with organic milk and traditional Nepali spice hints.",
+    "category": "milk",
+    "price": 320,
+    "sizes": [
+      { "size": "small", "price": 320 },
+      { "size": "regular", "price": 380 },
+      { "size": "large", "price": 450 }
+    ],
+    "image": "/images/products/kathmandu-cappuccino.jpg",
+    "available": true,
+    "ratingAverage": 4.8,
+    "ratingCount": 18,
+    "tags": ["creamy", "popular"],
+    "createdAt": "2025-01-15T10:35:00Z",
+    "updatedAt": "2025-08-01T14:25:00Z"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440003",
+    "name": "Everest Latte",
+    "slug": "everest-latte",
+    "description": "Smooth latte with locally sourced buffalo milk and mountain coffee essence.",
+    "category": "milk",
+    "price": 350,
+    "sizes": [
+      { "size": "regular", "price": 350 },
+      { "size": "large", "price": 420 }
+    ],
+    "image": "/images/products/everest-latte.jpg",
+    "available": true,
+    "ratingAverage": 4.6,
+    "ratingCount": 9,
+    "tags": ["smooth", "local-milk"],
+    "createdAt": "2025-01-15T10:40:00Z",
+    "updatedAt": "2025-08-01T14:30:00Z"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440004",
+    "name": "Pokhara Cold Brew",
+    "slug": "pokhara-coldbrew",
+    "description": "Refreshing cold brew inspired by the lakeside city, lightly sweetened with honey.",
+    "category": "cold",
+    "price": 390,
+    "sizes": [
+      { "size": "regular", "price": 390 },
+      { "size": "large", "price": 470 }
+    ],
+    "image": "/images/products/pokhara-coldbrew.jpg",
+    "available": true,
+    "ratingAverage": 4.5,
+    "ratingCount": 7,
+    "tags": ["refreshing", "honey-sweetened"],
+    "createdAt": "2025-01-15T10:45:00Z",
+    "updatedAt": "2025-08-01T14:35:00Z"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440005",
+    "name": "Sherpa Mocha",
+    "slug": "sherpa-mocha",
+    "description": "Rich mocha with dark chocolate and a hint of cardamom, Sherpa style.",
+    "category": "specialty",
+    "price": 420,
+    "sizes": [
+      { "size": "small", "price": 420 },
+      { "size": "regular", "price": 480 },
+      { "size": "large", "price": 550 }
+    ],
+    "image": "/images/products/sherpa-mocha.jpg",
+    "available": true,
+    "ratingAverage": 4.9,
+    "ratingCount": 22,
+    "tags": ["chocolate", "cardamom", "sherpa-special"],
+    "createdAt": "2025-01-15T10:50:00Z",
+    "updatedAt": "2025-08-01T14:40:00Z"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440006",
+    "name": "Chitwan Green Tea Latte",
+    "slug": "chitwan-green-tea-latte",
+    "description": "Premium green tea from Chitwan region blended with steamed milk.",
+    "category": "tea",
+    "price": 380,
+    "sizes": [
+      { "size": "regular", "price": 380 },
+      { "size": "large", "price": 450 }
+    ],
+    "image": "/images/products/chitwan-green-tea.jpg",
+    "available": true,
+    "ratingAverage": 4.4,
+    "ratingCount": 5,
+    "tags": ["green-tea", "chitwan", "healthy"],
+    "createdAt": "2025-01-15T10:55:00Z",
+    "updatedAt": "2025-08-01T14:45:00Z"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440007",
+    "name": "Mustang Special Coffee",
+    "slug": "mustang-special-coffee",
+    "description": "Traditional Mustang coffee preparation with butter tea influence.",
+    "category": "specialty",
+    "price": 450,
+    "sizes": [
+      { "size": "single", "price": 450 },
+      { "size": "double", "price": 580 }
+    ],
+    "image": "/images/products/mustang-special.jpg",
+    "available": false,
+    "ratingAverage": 4.9,
+    "ratingCount": 4,
+    "tags": ["traditional", "mustang", "butter-tea-style"],
+    "createdAt": "2025-01-15T11:00:00Z",
+    "updatedAt": "2025-08-01T14:50:00Z"
+  }
+]

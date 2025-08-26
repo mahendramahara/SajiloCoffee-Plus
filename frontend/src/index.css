@@ -1,0 +1,52 @@
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+@import './styles/user.css';
+@import './styles/admin.css';
+
+:root {
+  --color-bg: #f5f1eb;
+  --color-primary: #4b2e21;
+  --color-secondary: #c89f68;
+  --color-accent: #2f6f5e;
+  --color-text: #2a1f1a;
+  --color-muted: #6f625b;
+  --color-border: #e0d6cc;
+  --color-surface: #ffffff;
+  --color-surface-alt: #faf7f3;
+  --color-focus: #2f6f5e;
+  --color-danger: #b93d2b;
+  --color-success: #2e8261;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
