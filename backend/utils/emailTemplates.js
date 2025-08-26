@@ -333,3 +333,157 @@ export const loginNotificationTemplate = (userName, loginDetails) => {
 </body>
 </html>`;
 };
+
+export const orderConfirmationTemplate = (userName, order) => {
+  const itemsHtml = order.items.map(item => `
+    <tr>
+      <td style="padding: 12px; border-bottom: 1px solid #eee;">${item.productId?.name || 'Product'}</td>
+      <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: center;">${item.size}</td>
+      <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: center;">${item.qty}</td>
+      <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right;">NPR ${item.unitPrice}</td>
+      <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right;">NPR ${(item.unitPrice * item.qty).toFixed(2)}</td>
+    </tr>
+  `).join('');
+
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+        .container { max-width: 600px; margin: 0 auto; background-color: white; }
+        .header { background: linear-gradient(135deg, #8B4513, #D2691E); padding: 30px; text-align: center; }
+        .logo { color: white; font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .content { padding: 30px; }
+        .order-info { background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .order-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .order-table th { background-color: #8B4513; color: white; padding: 12px; text-align: left; }
+        .total-section { background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-top: 20px; }
+        .footer { background-color: #8B4513; color: white; padding: 25px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">☕ Sajilo Coffee Plus</div>
+            <div style="color: #f0f0f0;">Order Confirmation</div>
+        </div>
+        <div class="content">
+            <h2 style="color: #8B4513; margin-bottom: 20px;">Thank you for your order, ${userName}!</h2>
+            
+            <div class="order-info">
+                <p><strong>Order ID:</strong> ${order._id}</p>
+                <p><strong>Table Number:</strong> ${order.table}</p>
+                <p><strong>Order Date:</strong> ${new Date(order.placedAt).toLocaleDateString()}</p>
+                <p><strong>Status:</strong> ${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</p>
+            </div>
+
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Size</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${itemsHtml}
+                </tbody>
+            </table>
+
+            <div class="total-section">
+                <p style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span>Subtotal:</span>
+                    <span>NPR ${order.subtotal.toFixed(2)}</span>
+                </p>
+                ${order.discount > 0 ? `<p style="display: flex; justify-content: space-between; margin-bottom: 10px; color: #28a745;">
+                    <span>Discount:</span>
+                    <span>-NPR ${order.discount.toFixed(2)}</span>
+                </p>` : ''}
+                <hr style="margin: 10px 0;">
+                <p style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px;">
+                    <span>Total:</span>
+                    <span>NPR ${order.total.toFixed(2)}</span>
+                </p>
+            </div>
+
+            <p style="margin-top: 20px; color: #666;">
+                Your order is being prepared and will be served at Table ${order.table}. 
+                You'll receive updates as your order progresses through our kitchen.
+            </p>
+        </div>
+        <div class="footer">
+            <div>© 2024 Sajilo Coffee Plus</div>
+            <div style="margin-top: 10px;">Thank you for choosing us!</div>
+        </div>
+    </div>
+</body>
+</html>`;
+};
+
+export const orderStatusUpdateTemplate = (userName, order, status) => {
+  const statusMessages = {
+    preparing: 'Your order is now being prepared by our skilled baristas!',
+    served: 'Your order has been served! Enjoy your coffee experience.',
+    cancelled: 'Your order has been cancelled as requested.'
+  };
+
+  const statusColors = {
+    preparing: '#ffc107',
+    served: '#28a745',
+    cancelled: '#dc3545'
+  };
+
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Update</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+        .container { max-width: 600px; margin: 0 auto; background-color: white; }
+        .header { background: linear-gradient(135deg, ${statusColors[status]}, ${statusColors[status]}dd); padding: 30px; text-align: center; }
+        .logo { color: white; font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .content { padding: 30px; text-align: center; }
+        .status-badge { display: inline-block; background: ${statusColors[status]}; color: white; padding: 10px 20px; border-radius: 25px; font-weight: bold; margin: 20px 0; }
+        .order-info { background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: left; }
+        .footer { background-color: ${statusColors[status]}; color: white; padding: 25px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">☕ Sajilo Coffee Plus</div>
+            <div style="color: #f0f0f0;">Order Update</div>
+        </div>
+        <div class="content">
+            <h2 style="color: ${statusColors[status]}; margin-bottom: 20px;">Hi ${userName}!</h2>
+            
+            <div class="status-badge">${status.charAt(0).toUpperCase() + status.slice(1)}</div>
+            
+            <p style="font-size: 18px; margin: 20px 0;">${statusMessages[status]}</p>
+            
+            <div class="order-info">
+                <p><strong>Order ID:</strong> ${order._id}</p>
+                <p><strong>Table Number:</strong> ${order.table}</p>
+                <p><strong>Total Amount:</strong> NPR ${order.total.toFixed(2)}</p>
+                <p><strong>Updated At:</strong> ${new Date().toLocaleString()}</p>
+            </div>
+        </div>
+        <div class="footer">
+            <div>© 2024 Sajilo Coffee Plus</div>
+            <div style="margin-top: 10px;">Thank you for your patience!</div>
+        </div>
+    </div>
+</body>
+</html>`;
+};

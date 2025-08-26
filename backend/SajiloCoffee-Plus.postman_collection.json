@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Ramesh Thapa\",\r\n  \"email\": \"rameshthapa21@gmail.com\",\r\n  \"password\": \"Kathmandu@123\",\r\n  \"confirmPassword\": \"Kathmandu@123\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Mahendra Mahara\",\r\n  \"email\": \"mahendramahara@gmail.com\",\r\n  \"password\": \"Admin@1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,12 +24,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/register",
+							"raw": "{{baseUrl}}/user/register",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"users",
+								"user",
 								"register"
 							]
 						}
@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"rameshthapa@gmail.com\",\r\n  \"otp\": \"4NAJHS\"\r\n}",
+							"raw": "{\r\n  \"email\": \"mahendramahara@gmail.com\",\r\n  \"otp\": \"391339\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -51,12 +51,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/verify-email",
+							"raw": "{{baseUrl}}/user/verify-email",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"users",
+								"user",
 								"verify-email"
 							]
 						}
@@ -70,7 +70,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"rameshthapa1@gmail.com\"\r\n}",
+							"raw": "{\r\n  \"email\": \"mahendramahara@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -78,13 +78,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/resend-verification",
+							"raw": "{{baseUrl}}/user/resend-otp",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"users",
-								"resend-verification"
+								"user",
+								"resend-otp"
 							]
 						}
 					},
@@ -97,7 +97,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"mahendramahara369@gmail.com\",\r\n  \"password\": \"Admin@1234\"\r\n}",
+							"raw": "{\r\n  \"email\": \"mahendramahara@gmail.com\",\r\n  \"password\": \"Admin@1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -105,12 +105,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/login",
+							"raw": "{{baseUrl}}/user/login",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"users",
+								"user",
 								"login"
 							]
 						}
@@ -118,13 +118,13 @@
 					"response": []
 				},
 				{
-					"name": "Forgot-Password",
+					"name": "Forget-Password",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"rameshthapa@gmail.com\"\r\n}",
+							"raw": "{\r\n  \"email\": \"mahendramahara@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -132,13 +132,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/forgot-password",
+							"raw": "{{baseUrl}}/user/forget-password",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"users",
-								"forgot-password"
+								"user",
+								"forget-password"
 							]
 						}
 					},
@@ -151,7 +151,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"ramesh.thapa@gmail.com\",\r\n  \"otp\": \"Q6YKJK\",\r\n  \"newPassword\": \"Pokhara@123\",\r\n  \"confirmPassword\": \"Pokhara@123\"\r\n}",
+							"raw": "{\r\n  \"email\": \"mahendramahara@gmail.com\",\r\n  \"otp\": \"979038\",\r\n  \"newPassword\": \"Admin@1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -159,13 +159,40 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/reset-password",
+							"raw": "{{baseUrl}}/user/reset-password",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"users",
+								"user",
 								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change-Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"oldPassword\": \"Admin@1234\",\r\n  \"newPassword\": \"Admin@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/change-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"change-password"
 							]
 						}
 					},
@@ -181,7 +208,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"ramesh.thapa@gmail.com\",\r\n  \"otp\": \"DEF456\",\r\n  \"newPassword\": \"Pokhara@123\",\r\n  \"confirmPassword\": \"Pokhara@123\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -189,13 +216,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/profile",
+							"raw": "{{baseUrl}}/user/me",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"users",
-								"profile"
+								"user",
+								"me"
 							]
 						}
 					},
@@ -448,7 +475,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"admin@sajilo.com\",\r\n  \"password\": \"admin123\"\r\n}",
+							"raw": "{\r\n  \"email\": \"admin@coffeeshop.com\",\r\n  \"password\": \"admin123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -469,90 +496,79 @@
 					"response": []
 				},
 				{
+					"name": "Get-Admin-Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/admins/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admins",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update-Admin-Profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Updated Admin Name",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "+977-9876543210",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "NewPassword@123",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1f00e57b-1e23-4160-b66e-c1efa4484d1b"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admins/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admins",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Admin-Logout",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{adminToken}}",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/admin/logout",
+							"raw": "{{baseUrl}}/admins/logout",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"admin",
+								"admins",
 								"logout"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create-Admin",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{adminToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Root Admin\",\r\n  \"email\": \"rootadmin@sajilo.com\",\r\n  \"password\": \"Admin@123\",\r\n  \"role\": \"admin\",\r\n  \"department\": \"Management\",\r\n  \"employeeId\": \"EMP001\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/admin/create",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"admin",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create-Admin-With-Custom-Permissions",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{adminToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Staff Admin\",\r\n  \"email\": \"staff@sajilo.com\",\r\n  \"password\": \"Staff@123\",\r\n  \"role\": \"staff\",\r\n  \"department\": \"Operations\",\r\n  \"employeeId\": \"EMP002\",\r\n  \"permissions\": {\r\n    \"products\": {\r\n      \"read\": true,\r\n      \"create\": true,\r\n      \"update\": true,\r\n      \"delete\": false,\r\n      \"bulkActions\": false\r\n    },\r\n    \"orders\": {\r\n      \"read\": true,\r\n      \"create\": true,\r\n      \"update\": true,\r\n      \"delete\": false,\r\n      \"refund\": false,\r\n      \"statusChange\": true\r\n    },\r\n    \"users\": {\r\n      \"read\": true,\r\n      \"create\": false,\r\n      \"update\": false,\r\n      \"delete\": false,\r\n      \"suspend\": false,\r\n      \"viewStats\": true\r\n    },\r\n    \"subscriptions\": {\r\n      \"read\": true,\r\n      \"create\": false,\r\n      \"update\": false,\r\n      \"delete\": false,\r\n      \"analytics\": false\r\n    },\r\n    \"analytics\": {\r\n      \"sales\": true,\r\n      \"products\": true,\r\n      \"users\": false,\r\n      \"revenue\": false,\r\n      \"export\": false\r\n    },\r\n    \"settings\": {\r\n      \"cafe\": false,\r\n      \"tables\": false,\r\n      \"pricing\": false,\r\n      \"notifications\": false\r\n    },\r\n    \"admins\": {\r\n      \"read\": false,\r\n      \"create\": false,\r\n      \"update\": false,\r\n      \"delete\": false\r\n    }\r\n  }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/admin/create",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"admin",
-								"create"
 							]
 						}
 					},
@@ -562,20 +578,40 @@
 					"name": "Get-All-Admins",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{adminToken}}",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/admin",
+							"raw": "{{baseUrl}}/admins",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"admin"
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create-Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"New Admin\",\r\n  \"email\": \"newadmin@coffeeshop.com\",\r\n  \"password\": \"NewAdmin@123\",\r\n  \"phone\": \"+977-9876543210\",\r\n  \"role\": \"admin\",\r\n  \"privileges\": {\r\n    \"canManageUsers\": true,\r\n    \"canManageProducts\": true,\r\n    \"canManageOrders\": false,\r\n    \"canManageSubscriptions\": true,\r\n    \"canViewAnalytics\": true,\r\n    \"canManageAdmins\": false,\r\n    \"canManageSystemSettings\": false\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admins",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admins"
 							]
 						}
 					},
@@ -585,20 +621,14 @@
 					"name": "Get-Admin-By-Id",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{adminToken}}",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/admin/64a7b5e9f52d8e1234567890",
+							"raw": "{{baseUrl}}/admins/64a7b5e9f52d8e1234567890",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"admin",
+								"admins",
 								"64a7b5e9f52d8e1234567890"
 							]
 						}
@@ -609,13 +639,7 @@
 					"name": "Update-Admin",
 					"request": {
 						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{adminToken}}",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -626,71 +650,38 @@
 								},
 								{
 									"key": "email",
-									"value": "updated.admin@sajilo.com",
+									"value": "updated.admin@coffeeshop.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "+977-9876543210",
 									"type": "text"
 								},
 								{
 									"key": "role",
-									"value": "manager",
+									"value": "admin",
 									"type": "text"
 								},
 								{
-									"key": "department",
-									"value": "Operations",
+									"key": "privileges",
+									"value": "{\"canManageUsers\":true,\"canManageProducts\":true,\"canManageOrders\":true,\"canManageSubscriptions\":true,\"canViewAnalytics\":true,\"canManageAdmins\":false,\"canManageSystemSettings\":false}",
 									"type": "text"
 								},
 								{
-									"key": "isActive",
-									"value": "true",
-									"type": "text"
-								},
-								{
-									"key": "avatar",
+									"key": "image",
 									"type": "file",
 									"src": "postman-cloud:///1f00e57b-1e23-4160-b66e-c1efa4484d1b"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/admin/64a7b5e9f52d8e1234567890",
+							"raw": "{{baseUrl}}/admins/64a7b5e9f52d8e1234567890",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"admin",
-								"64a7b5e9f52d8e1234567890"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update-Admin-JSON",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{adminToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Updated Admin Name JSON\",\r\n  \"role\": \"manager\",\r\n  \"department\": \"Operations\",\r\n  \"isActive\": true\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/admin/64a7b5e9f52d8e1234567890",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"admin",
+								"admins",
 								"64a7b5e9f52d8e1234567890"
 							]
 						}
@@ -701,53 +692,14 @@
 					"name": "Delete-Admin",
 					"request": {
 						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{adminToken}}",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/admin/64a7b5e9f52d8e1234567890",
+							"raw": "{{baseUrl}}/admins/64a7b5e9f52d8e1234567890",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"admin",
-								"64a7b5e9f52d8e1234567890"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update-Admin-Permissions",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{adminToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Updated Staff Admin\",\r\n  \"permissions\": {\r\n    \"products\": {\r\n      \"delete\": true,\r\n      \"bulkActions\": true\r\n    },\r\n    \"orders\": {\r\n      \"refund\": true\r\n    },\r\n    \"analytics\": {\r\n      \"revenue\": true,\r\n      \"export\": true\r\n    }\r\n  }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/admin/64a7b5e9f52d8e1234567890",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"admin",
+								"admins",
 								"64a7b5e9f52d8e1234567890"
 							]
 						}
@@ -1508,6 +1460,16 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTJjODIzNDY2ZTJiMmYxNzAwM2NmMiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzU1NTAwMTE2LCJleHAiOjE3NTYxMDQ5MTZ9.5V5sMuYir7JzQ4E-iWrEB6uTG1fXbbZrw6ELpxqxjps",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
@@ -1525,10 +1487,7 @@
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
-					"// Extract token from login response",
-					"if (pm.response.json().success && pm.response.json().data.token) {",
-					"    pm.environment.set('adminToken', pm.response.json().data.token);",
-					"}"
+					""
 				]
 			}
 		}
@@ -1536,13 +1495,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "http://localhost:7267/api/v1",
-			"type": "string"
-		},
-		{
-			"key": "adminToken",
-			"value": "",
-			"type": "string"
+			"value": "http://localhost:7267/api/v1"
 		}
 	]
 }
