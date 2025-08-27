@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
+import { useAdminAuth } from "../context/AdminAuthContext";
 import { LoadingSpinner } from "../utils/loading";
 import { Unauthorized, Forbidden } from "../components/common/ErrorPages";
 
@@ -11,7 +12,19 @@ const ProtectedRoute = ({
   requirePermission = null,
   fallback = null,
 }) => {
-  const { isLoggedIn, isLoading, userRole, hasPermission } = useAuth();
+  const isAdminRoute = requiredRole === "admin" || requiredRole === "manager" || requiredRole === "staff";
+  
+  const userAuth = useAuth();
+  const adminAuth = useAdminAuth();
+  
+  const { isLoggedIn, isLoading, userRole, hasPermission } = isAdminRoute ? {
+    isLoggedIn: adminAuth.isLoggedIn,
+    isLoading: adminAuth.isLoading,
+    userRole: adminAuth.admin?.role,
+    hasPermission: (resource, action) => {
+      return adminAuth.admin?.permissions?.[resource]?.[action] || false;
+    }
+  } : userAuth;
 
   if (isLoading) {
     return <LoadingSpinner size="large" />;
@@ -27,7 +40,7 @@ const ProtectedRoute = ({
   if (
     requiredRole &&
     requiredRole === "admin" &&
-    !["admin", "manager"].includes(userRole)
+    !["admin", "manager", "staff"].includes(userRole)
   ) {
     return <Navigate to="/admin/login" replace />;
   }

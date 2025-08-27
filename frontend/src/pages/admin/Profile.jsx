@@ -10,18 +10,18 @@ import {
   Badge,
   Modal,
 } from "react-bootstrap";
-import { useAuth } from "../../context/useAuth";
+import { useAdminAuth } from "../../context/AdminAuthContext";
 import { showNotification } from "../../utils/notify";
 
 const Profile = () => {
-  const { user, logout } = useAuth();
+  const { admin, logout } = useAdminAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [profileData, setProfileData] = useState({
-    name: user?.name || "Admin User",
-    email: user?.email || "admin@sajilocoffee.com",
+    name: admin?.name || "Admin User",
+    email: admin?.email || "admin@sajilocoffee.com",
     phone: "+977-9801234567",
-    role: user?.role || "admin",
+    role: admin?.role || "admin",
     department: "Management",
     joinDate: "2024-01-15",
     lastLogin: new Date().toISOString(),

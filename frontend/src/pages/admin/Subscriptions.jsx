@@ -14,13 +14,13 @@ import {
   ProgressBar,
   ListGroup,
 } from "react-bootstrap";
-import { useAuth } from "../../context/useAuth";
+import { useAdminAuth } from "../../context/AdminAuthContext";
 import { showNotification } from "../../utils/notify";
 import subscriptionsData from "../../api/subscriptions.json";
 import usersData from "../../api/users.json";
 
 const SubscriptionManagement = () => {
-  const { hasPermission } = useAuth();
+  const { admin } = useAdminAuth();
   const [subscriptions, setSubscriptions] = useState([]);
   const [userSubscriptions, setUserSubscriptions] = useState([]);
   const [filteredSubscriptions, setFilteredSubscriptions] = useState([]);
@@ -205,13 +205,6 @@ const SubscriptionManagement = () => {
   const handlePlanSubmit = (e) => {
     e.preventDefault();
 
-    if (!hasPermission("subscriptions", editingPlan ? "update" : "create")) {
-      showNotification.error(
-        "You do not have permission to perform this action"
-      );
-      return;
-    }
-
     const planData = {
       ...planFormData,
       price: parseFloat(planFormData.price),
@@ -281,7 +274,7 @@ const SubscriptionManagement = () => {
             Manage subscription plans and subscribers
           </p>
         </div>
-        {hasPermission("subscriptions", "create") && (
+        {admin?.permissions?.subscriptions?.create && (
           <Button
             variant="primary"
             className="btn-admin-primary"
@@ -535,7 +528,7 @@ const SubscriptionManagement = () => {
                           >
                             <i className="fas fa-eye"></i>
                           </Button>
-                          {hasPermission("subscriptions", "update") && (
+                          {admin?.permissions?.subscriptions?.update && (
                             <Button
                               variant="outline-primary"
                               size="sm"
@@ -545,7 +538,7 @@ const SubscriptionManagement = () => {
                               <i className="fas fa-edit"></i>
                             </Button>
                           )}
-                          {hasPermission("subscriptions", "delete") && (
+                          {admin?.permissions?.subscriptions?.delete && (
                             <Button variant="outline-danger" size="sm">
                               <i className="fas fa-trash"></i>
                             </Button>
@@ -641,7 +634,7 @@ const SubscriptionManagement = () => {
                           >
                             <i className="fas fa-eye"></i>
                           </Button>
-                          {hasPermission("subscriptions", "update") && (
+                          {admin?.permissions?.subscriptions?.update && (
                             <Button variant="outline-warning" size="sm">
                               <i className="fas fa-pause"></i>
                             </Button>

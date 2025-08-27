@@ -12,12 +12,12 @@ import {
   Pagination,
   InputGroup,
 } from "react-bootstrap";
-import { useAuth } from "../../context/useAuth";
+import { useAdminAuth } from "../../context/AdminAuthContext";
 import { showNotification } from "../../utils/notify";
 import productsData from "../../api/products.json";
 
 const ProductManagement = () => {
-  const { hasPermission } = useAuth();
+  const { admin } = useAdminAuth();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -163,7 +163,7 @@ const ProductManagement = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!hasPermission("products", editingProduct ? "update" : "create")) {
+    if (!admin?.permissions?.products?.[editingProduct ? "update" : "create"]) {
       showNotification.error(
         "You do not have permission to perform this action"
       );
@@ -194,7 +194,7 @@ const ProductManagement = () => {
   };
 
   const handleDelete = (productId) => {
-    if (!hasPermission("products", "delete")) {
+    if (!admin?.permissions?.products?.delete) {
       showNotification.error("You do not have permission to delete products");
       return;
     }
@@ -206,7 +206,7 @@ const ProductManagement = () => {
   };
 
   const toggleAvailability = (productId) => {
-    if (!hasPermission("products", "update")) {
+    if (!admin?.permissions?.products?.update) {
       showNotification.error("You do not have permission to update products");
       return;
     }
@@ -230,6 +230,26 @@ const ProductManagement = () => {
     return variants[category] || "dark";
   };
 
+  function getProductImage(product) {
+    if (product.image && product.image.trim() !== "") {
+      // If image path does not start with '/' assume it's from public
+      if (!product.image.startsWith('/')) {
+        return `/media/products/${product.image}`;
+      }
+      return product.image;
+    }
+    const fallbackImages = [
+      '/media/products/1.png',
+      '/media/products/2.png',
+      '/media/products/3.png',
+      '/media/products/4.png',
+      '/media/products/5.png'
+    ];
+    // Use product.id to pick a fallback image for consistency, or random for each render
+    const randomIndex = product.id ? (parseInt(product.id, 10) % fallbackImages.length) : Math.floor(Math.random() * fallbackImages.length);
+    return fallbackImages[randomIndex];
+  }
+
   return (
     <Container fluid>
       <div className="d-flex justify-content-between align-items-center mb-4">
@@ -239,7 +259,7 @@ const ProductManagement = () => {
             Manage your coffee products and menu items
           </p>
         </div>
-        {hasPermission("products", "create") && (
+        {admin?.permissions?.products?.create && (
           <Button
             variant="primary"
             className="btn-admin-primary"
@@ -316,7 +336,22 @@ const ProductManagement = () => {
                     <div className="d-flex align-items-center">
                       <div className="product-image me-3">
                         <div className="product-placeholder">
-                          <i className="fas fa-coffee"></i>
+                          <img
+                            src={getProductImage(product)}
+                            alt={product.name}
+                            style={{
+                              width: 80,
+                              height: 80,
+                              objectFit: "cover",
+                              borderRadius: 8,
+                              background: "#f5f5f5",
+                              display: "block",
+                            }}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = "/media/products/1.png";
+                            }}
+                          />
                         </div>
                       </div>
                       <div>
@@ -359,7 +394,7 @@ const ProductManagement = () => {
                         type="checkbox"
                         checked={product.available}
                         onChange={() => toggleAvailability(product.id)}
-                        disabled={!hasPermission("products", "update")}
+                        disabled={!admin?.permissions?.products?.update}
                       />
                       <label className="form-check-label">
                         {product.available ? "Available" : "Unavailable"}
@@ -368,7 +403,7 @@ const ProductManagement = () => {
                   </td>
                   <td>
                     <div className="btn-group" role="group">
-                      {hasPermission("products", "update") && (
+                      {admin?.permissions?.products?.update && (
                         <Button
                           variant="outline-primary"
                           size="sm"
@@ -377,7 +412,7 @@ const ProductManagement = () => {
                           <i className="fas fa-edit"></i>
                         </Button>
                       )}
-                      {hasPermission("products", "delete") && (
+                      {admin?.permissions?.products?.delete && (
                         <Button
                           variant="outline-danger"
                           size="sm"
@@ -406,11 +441,8 @@ const ProductManagement = () => {
                 />
 
                 {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                  const pageNumber =
-                    currentPage <= 3 ? i + 1 : currentPage - 2 + i;
-                  if (pageNumber > totalPages) return null;
-
-                  return (
+                  const pageNumber = currentPage <= 3 ? i + 1 : currentPage - 2 + i;
+                  return pageNumber <= totalPages ? (
                     <Pagination.Item
                       key={pageNumber}
                       active={pageNumber === currentPage}
@@ -418,7 +450,7 @@ const ProductManagement = () => {
                     >
                       {pageNumber}
                     </Pagination.Item>
-                  );
+                  ) : null;
                 })}
 
                 <Pagination.Next
@@ -435,29 +467,48 @@ const ProductManagement = () => {
         </Card.Body>
       </Card>
 
-      <Modal show={showModal} onHide={handleCloseModal} size="lg">
+      <Modal
+        show={showModal}
+        onHide={handleCloseModal}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
         <Modal.Header closeButton>
-          <Modal.Title>
-            {editingProduct ? "Edit Product" : "Add New Product"}
+          <Modal.Title id="contained-modal-title-vcenter">
+            {editingProduct ? "Edit Product" : "Add Product"}
           </Modal.Title>
         </Modal.Header>
-        <Form onSubmit={handleSubmit}>
-          <Modal.Body>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
             <Row>
-              <Col md={6}>
-                <Form.Group className="mb-3">
+              <Col md={8}>
+                <Form.Group className="mb-3" controlId="formProductName">
                   <Form.Label>Product Name</Form.Label>
                   <Form.Control
                     type="text"
+                    placeholder="Enter product name"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
                     required
                   />
                 </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group className="mb-3">
+
+                <Form.Group className="mb-3" controlId="formProductDescription">
+                  <Form.Label>Product Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    placeholder="Enter product description"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formProductCategory">
                   <Form.Label>Category</Form.Label>
                   <Form.Select
                     name="category"
@@ -466,132 +517,121 @@ const ProductManagement = () => {
                     required
                   >
                     <option value="">Select category</option>
-                    {categories.slice(1).map((category) => (
-                      <option key={category} value={category}>
-                        {category.charAt(0).toUpperCase() + category.slice(1)}
-                      </option>
-                    ))}
+                    {categories
+                      .filter((category) => category !== "all")
+                      .map((category) => (
+                        <option key={category} value={category}>
+                          {category.charAt(0).toUpperCase() + category.slice(1)}
+                        </option>
+                      ))}
                   </Form.Select>
                 </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formProductPrice">
+                  <Form.Label>Price</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter product price"
+                    name="price"
+                    value={formData.price}
+                    onChange={handleInputChange}
+                    required
+                    min="0"
+                    step="0.01"
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formProductSizes">
+                  <Form.Label>Sizes</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter available sizes, separated by commas"
+                    name="sizes"
+                    value={formData.sizes.join(", ")}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        sizes: e.target.value.split(",").map((size) => size.trim()),
+                      }))
+                    }
+                  />
+                  <Form.Text className="text-muted">
+                    Optional: Specify sizes like "S, M, L, XL"
+                  </Form.Text>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formProductTags">
+                  <Form.Label>Tags</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter product tags, separated by commas"
+                    name="tags"
+                    value={formData.tags.join(", ")}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        tags: e.target.value.split(",").map((tag) => tag.trim()),
+                      }))
+                    }
+                  />
+                  <Form.Text className="text-muted">
+                    Optional: Add tags like "organic, fairtrade, seasonal"
+                  </Form.Text>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formProductAvailability">
+                  <Form.Check
+                    type="checkbox"
+                    label="Available"
+                    name="available"
+                    checked={formData.available}
+                    onChange={handleInputChange}
+                  />
+                </Form.Group>
               </Col>
-            </Row>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                required
-              />
-            </Form.Group>
-
-            <Row>
-              <Col md={6}>
-                <Form.Group className="mb-3">
+              <Col md={4}>
+                <div className="image-upload-preview text-center mb-3">
+                  <img
+                    src={formData.imagePreview}
+                    alt="Product"
+                    className="img-fluid rounded"
+                    style={{ maxHeight: 200, objectFit: "cover" }}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/media/products/1.png";
+                    }}
+                  />
+                </div>
+                <Form.Group controlId="formProductImage">
                   <Form.Label>Product Image</Form.Label>
                   <Form.Control
                     type="file"
                     accept="image/*"
                     onChange={handleImageChange}
-                  />
-                  {formData.imagePreview && (
-                    <div className="mt-2">
-                      <img
-                        src={formData.imagePreview}
-                        alt="Preview"
-                        style={{
-                          maxWidth: "100px",
-                          maxHeight: "100px",
-                          objectFit: "cover",
-                          borderRadius: "8px",
-                          border: "1px solid #ddd",
-                        }}
-                      />
-                    </div>
-                  )}
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Available Sizes</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="e.g. small,regular,large"
-                    value={formData.sizes.map((s) => s.size).join(",")}
-                    onChange={(e) => {
-                      const sizes = e.target.value
-                        .split(",")
-                        .map((size) => ({
-                          size: size.trim(),
-                          price: formData.price,
-                        }))
-                        .filter((s) => s.size);
-                      setFormData((prev) => ({ ...prev, sizes }));
-                    }}
+                    required={!editingProduct}
                   />
                   <Form.Text className="text-muted">
-                    Separate sizes with commas
+                    {editingProduct
+                      ? "Leave blank to keep current image"
+                      : "Recommended size: 800x800px"}
                   </Form.Text>
                 </Form.Group>
               </Col>
             </Row>
-
-            <Row>
-              <Col md={6}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Base Price (NPR)</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="price"
-                    value={formData.price}
-                    onChange={handleInputChange}
-                    min="0"
-                    step="10"
-                    required
-                  />
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Slug</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="slug"
-                    value={formData.slug}
-                    onChange={handleInputChange}
-                    required
-                    readOnly
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-
-            <Form.Group className="mb-3">
-              <Form.Check
-                type="checkbox"
-                name="available"
-                label="Available for order"
-                checked={formData.available}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseModal}>
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              variant="primary"
-              className="btn-admin-primary"
-            >
-              {editingProduct ? "Update Product" : "Create Product"}
-            </Button>
-          </Modal.Footer>
-        </Form>
+            <div className="d-flex justify-content-end mt-4">
+              <Button
+                variant="secondary"
+                className="me-2"
+                onClick={handleCloseModal}
+              >
+                Cancel
+              </Button>
+              <Button variant="primary" type="submit">
+                {editingProduct ? "Update Product" : "Create Product"}
+              </Button>
+            </div>
+          </Form>
+        </Modal.Body>
       </Modal>
     </Container>
   );

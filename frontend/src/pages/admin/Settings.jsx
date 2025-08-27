@@ -11,11 +11,11 @@ import {
   Tab,
   Badge,
 } from "react-bootstrap";
-import { useAuth } from "../../context/useAuth";
+import { useAdminAuth } from "../../context/AdminAuthContext";
 import { showNotification } from "../../utils/notify";
 
 const Settings = () => {
-  const { user, hasPermission } = useAuth();
+  const { admin } = useAdminAuth();
   const [activeTab, setActiveTab] = useState("general");
   const [settings, setSettings] = useState({
     general: {
@@ -71,7 +71,7 @@ const Settings = () => {
   });
 
   const handleSettingChange = (category, key, value) => {
-    if (!hasPermission("settings", "general")) {
+    if (!(admin?.permissions?.settings?.general ?? false)) {
       showNotification.error("You do not have permission to change settings");
       return;
     }
@@ -86,7 +86,7 @@ const Settings = () => {
   };
 
   const handleOperatingHoursChange = (day, field, value) => {
-    if (!hasPermission("settings", "business")) {
+    if (!(admin?.permissions?.settings?.business ?? false)) {
       showNotification.error(
         "You do not have permission to change business settings"
       );
@@ -109,7 +109,7 @@ const Settings = () => {
   };
 
   const handleSaveSettings = (category) => {
-    if (!hasPermission("settings", category)) {
+    if (!(admin?.permissions?.settings?.[category] ?? false)) {
       showNotification.error(
         `You do not have permission to save ${category} settings`
       );
@@ -127,7 +127,7 @@ const Settings = () => {
   };
 
   const resetToDefaults = (category) => {
-    if (!hasPermission("settings", category)) {
+    if (!(admin?.permissions?.settings?.[category] ?? false)) {
       showNotification.error(
         `You do not have permission to reset ${category} settings`
       );
@@ -162,7 +162,7 @@ const Settings = () => {
         </div>
         <Badge bg="info" className="settings-badge">
           <i className="fas fa-user-shield me-2"></i>
-          {user?.role || "Admin"}
+          {admin?.role || "Admin"}
         </Badge>
       </div>
 
@@ -237,7 +237,9 @@ const Settings = () => {
                                   e.target.value
                                 )
                               }
-                              disabled={!hasPermission("settings", "general")}
+                              disabled={
+                                !(admin?.permissions?.settings?.general ?? false)
+                              }
                             />
                           </Form.Group>
                         </Col>
@@ -254,7 +256,9 @@ const Settings = () => {
                                   e.target.value
                                 )
                               }
-                              disabled={!hasPermission("settings", "general")}
+                              disabled={
+                                !(admin?.permissions?.settings?.general ?? false)
+                              }
                             />
                           </Form.Group>
                         </Col>
@@ -274,7 +278,9 @@ const Settings = () => {
                                   e.target.value
                                 )
                               }
-                              disabled={!hasPermission("settings", "general")}
+                              disabled={
+                                !(admin?.permissions?.settings?.general ?? false)
+                              }
                             />
                           </Form.Group>
                         </Col>
@@ -290,7 +296,9 @@ const Settings = () => {
                                   e.target.value
                                 )
                               }
-                              disabled={!hasPermission("settings", "general")}
+                              disabled={
+                                !(admin?.permissions?.settings?.general ?? false)
+                              }
                             >
                               <option value="Asia/Kathmandu">
                                 Asia/Kathmandu
@@ -317,7 +325,9 @@ const Settings = () => {
                                   e.target.value
                                 )
                               }
-                              disabled={!hasPermission("settings", "general")}
+                              disabled={
+                                !(admin?.permissions?.settings?.general ?? false)
+                              }
                             />
                           </Form.Group>
                         </Col>
@@ -336,7 +346,9 @@ const Settings = () => {
                                   e.target.value
                                 )
                               }
-                              disabled={!hasPermission("settings", "general")}
+                              disabled={
+                                !(admin?.permissions?.settings?.general ?? false)
+                              }
                             >
                               <option value="NPR">NPR (Nepalese Rupee)</option>
                               <option value="USD">USD (US Dollar)</option>
@@ -356,7 +368,9 @@ const Settings = () => {
                                   e.target.value
                                 )
                               }
-                              disabled={!hasPermission("settings", "general")}
+                              disabled={
+                                !(admin?.permissions?.settings?.general ?? false)
+                              }
                             >
                               <option value="en">English</option>
                               <option value="ne">Nepali</option>
@@ -371,7 +385,9 @@ const Settings = () => {
                           variant="primary"
                           className="btn-admin-primary me-2"
                           onClick={() => handleSaveSettings("general")}
-                          disabled={!hasPermission("settings", "general")}
+                          disabled={
+                            !(admin?.permissions?.settings?.general ?? false)
+                          }
                         >
                           <i className="fas fa-save me-2"></i>
                           Save Changes
@@ -379,7 +395,9 @@ const Settings = () => {
                         <Button
                           variant="outline-secondary"
                           onClick={() => resetToDefaults("general")}
-                          disabled={!hasPermission("settings", "general")}
+                          disabled={
+                            !(admin?.permissions?.settings?.general ?? false)
+                          }
                         >
                           <i className="fas fa-undo me-2"></i>
                           Reset to Defaults
@@ -425,7 +443,7 @@ const Settings = () => {
                                       )
                                     }
                                     disabled={
-                                      !hasPermission("settings", "business")
+                                      !(admin?.permissions?.settings?.business ?? false)
                                     }
                                   />
                                 </Col>
@@ -442,7 +460,7 @@ const Settings = () => {
                                     }
                                     disabled={
                                       hours.closed ||
-                                      !hasPermission("settings", "business")
+                                      !(admin?.permissions?.settings?.business ?? false)
                                     }
                                   />
                                 </Col>
@@ -462,7 +480,7 @@ const Settings = () => {
                                     }
                                     disabled={
                                       hours.closed ||
-                                      !hasPermission("settings", "business")
+                                      !(admin?.permissions?.settings?.business ?? false)
                                     }
                                   />
                                 </Col>
@@ -489,7 +507,9 @@ const Settings = () => {
                                   parseFloat(e.target.value)
                                 )
                               }
-                              disabled={!hasPermission("settings", "business")}
+                              disabled={
+                                !(admin?.permissions?.settings?.business ?? false)
+                              }
                             />
                           </Form.Group>
                         </Col>
@@ -509,7 +529,9 @@ const Settings = () => {
                                   parseFloat(e.target.value)
                                 )
                               }
-                              disabled={!hasPermission("settings", "business")}
+                              disabled={
+                                !(admin?.permissions?.settings?.business ?? false)
+                              }
                             />
                           </Form.Group>
                         </Col>
@@ -530,7 +552,9 @@ const Settings = () => {
                                   parseInt(e.target.value)
                                 )
                               }
-                              disabled={!hasPermission("settings", "business")}
+                              disabled={
+                                !(admin?.permissions?.settings?.business ?? false)
+                              }
                             />
                           </Form.Group>
                         </Col>
@@ -548,7 +572,9 @@ const Settings = () => {
                                   parseInt(e.target.value)
                                 )
                               }
-                              disabled={!hasPermission("settings", "business")}
+                              disabled={
+                                !(admin?.permissions?.settings?.business ?? false)
+                              }
                             />
                           </Form.Group>
                         </Col>
@@ -559,7 +585,9 @@ const Settings = () => {
                           variant="primary"
                           className="btn-admin-primary me-2"
                           onClick={() => handleSaveSettings("business")}
-                          disabled={!hasPermission("settings", "business")}
+                          disabled={
+                            !(admin?.permissions?.settings?.business ?? false)
+                          }
                         >
                           <i className="fas fa-save me-2"></i>
                           Save Changes
@@ -567,7 +595,9 @@ const Settings = () => {
                         <Button
                           variant="outline-secondary"
                           onClick={() => resetToDefaults("business")}
-                          disabled={!hasPermission("settings", "business")}
+                          disabled={
+                            !(admin?.permissions?.settings?.business ?? false)
+                          }
                         >
                           <i className="fas fa-undo me-2"></i>
                           Reset to Defaults
@@ -605,7 +635,10 @@ const Settings = () => {
                                   )
                                 }
                                 disabled={
-                                  !hasPermission("settings", "notifications")
+                                  !(
+                                    admin?.permissions?.settings?.notifications ??
+                                    false
+                                  )
                                 }
                                 className="mb-3"
                               />
@@ -623,7 +656,10 @@ const Settings = () => {
                                   )
                                 }
                                 disabled={
-                                  !hasPermission("settings", "notifications")
+                                  !(
+                                    admin?.permissions?.settings?.notifications ??
+                                    false
+                                  )
                                 }
                                 className="mb-3"
                               />
@@ -641,7 +677,10 @@ const Settings = () => {
                                   )
                                 }
                                 disabled={
-                                  !hasPermission("settings", "notifications")
+                                  !(
+                                    admin?.permissions?.settings?.notifications ??
+                                    false
+                                  )
                                 }
                                 className="mb-3"
                               />
@@ -661,7 +700,10 @@ const Settings = () => {
                                   )
                                 }
                                 disabled={
-                                  !hasPermission("settings", "notifications")
+                                  !(
+                                    admin?.permissions?.settings?.notifications ??
+                                    false
+                                  )
                                 }
                                 className="mb-3"
                               />
@@ -677,7 +719,10 @@ const Settings = () => {
                                   )
                                 }
                                 disabled={
-                                  !hasPermission("settings", "notifications")
+                                  !(
+                                    admin?.permissions?.settings?.notifications ??
+                                    false
+                                  )
                                 }
                                 className="mb-3"
                               />
@@ -695,7 +740,10 @@ const Settings = () => {
                                   )
                                 }
                                 disabled={
-                                  !hasPermission("settings", "notifications")
+                                  !(
+                                    admin?.permissions?.settings?.notifications ??
+                                    false
+                                  )
                                 }
                                 className="mb-3"
                               />
@@ -709,7 +757,12 @@ const Settings = () => {
                           variant="primary"
                           className="btn-admin-primary me-2"
                           onClick={() => handleSaveSettings("notifications")}
-                          disabled={!hasPermission("settings", "notifications")}
+                          disabled={
+                            !(
+                              admin?.permissions?.settings?.notifications ??
+                              false
+                            )
+                          }
                         >
                           <i className="fas fa-save me-2"></i>
                           Save Changes
@@ -717,7 +770,12 @@ const Settings = () => {
                         <Button
                           variant="outline-secondary"
                           onClick={() => resetToDefaults("notifications")}
-                          disabled={!hasPermission("settings", "notifications")}
+                          disabled={
+                            !(
+                              admin?.permissions?.settings?.notifications ??
+                              false
+                            )
+                          }
                         >
                           <i className="fas fa-undo me-2"></i>
                           Reset to Defaults
@@ -756,7 +814,9 @@ const Settings = () => {
                                   parseInt(e.target.value)
                                 )
                               }
-                              disabled={!hasPermission("settings", "security")}
+                              disabled={
+                                !(admin?.permissions?.settings?.security ?? false)
+                              }
                             />
                           </Form.Group>
                         </Col>
@@ -775,7 +835,9 @@ const Settings = () => {
                                   parseInt(e.target.value)
                                 )
                               }
-                              disabled={!hasPermission("settings", "security")}
+                              disabled={
+                                !(admin?.permissions?.settings?.security ?? false)
+                              }
                             />
                           </Form.Group>
                         </Col>
@@ -797,7 +859,9 @@ const Settings = () => {
                                   parseInt(e.target.value)
                                 )
                               }
-                              disabled={!hasPermission("settings", "security")}
+                              disabled={
+                                !(admin?.permissions?.settings?.security ?? false)
+                              }
                             />
                           </Form.Group>
                         </Col>
@@ -818,7 +882,9 @@ const Settings = () => {
                                   parseInt(e.target.value)
                                 )
                               }
-                              disabled={!hasPermission("settings", "security")}
+                              disabled={
+                                !(admin?.permissions?.settings?.security ?? false)
+                              }
                             />
                           </Form.Group>
                         </Col>
@@ -837,7 +903,9 @@ const Settings = () => {
                                 e.target.checked
                               )
                             }
-                            disabled={!hasPermission("settings", "security")}
+                            disabled={
+                              !(admin?.permissions?.settings?.security ?? false)
+                            }
                             className="mb-3"
                           />
                         </Col>
@@ -853,7 +921,9 @@ const Settings = () => {
                                 e.target.checked
                               )
                             }
-                            disabled={!hasPermission("settings", "security")}
+                            disabled={
+                              !(admin?.permissions?.settings?.security ?? false)
+                            }
                             className="mb-3"
                           />
                         </Col>
@@ -864,7 +934,9 @@ const Settings = () => {
                           variant="primary"
                           className="btn-admin-primary me-2"
                           onClick={() => handleSaveSettings("security")}
-                          disabled={!hasPermission("settings", "security")}
+                          disabled={
+                            !(admin?.permissions?.settings?.security ?? false)
+                          }
                         >
                           <i className="fas fa-save me-2"></i>
                           Save Changes
@@ -872,7 +944,9 @@ const Settings = () => {
                         <Button
                           variant="outline-secondary"
                           onClick={() => resetToDefaults("security")}
-                          disabled={!hasPermission("settings", "security")}
+                          disabled={
+                            !(admin?.permissions?.settings?.security ?? false)
+                          }
                         >
                           <i className="fas fa-undo me-2"></i>
                           Reset to Defaults
@@ -905,7 +979,7 @@ const Settings = () => {
                                 )
                               }
                               disabled={
-                                !hasPermission("settings", "appearance")
+                                !(admin?.permissions?.settings?.appearance ?? false)
                               }
                             >
                               <option value="light">Light</option>
@@ -928,7 +1002,7 @@ const Settings = () => {
                                 )
                               }
                               disabled={
-                                !hasPermission("settings", "appearance")
+                                !(admin?.permissions?.settings?.appearance ?? false)
                               }
                             />
                           </Form.Group>
@@ -948,7 +1022,9 @@ const Settings = () => {
                                 e.target.checked
                               )
                             }
-                            disabled={!hasPermission("settings", "appearance")}
+                            disabled={
+                              !(admin?.permissions?.settings?.appearance ?? false)
+                            }
                             className="mb-3"
                           />
                         </Col>
@@ -964,7 +1040,9 @@ const Settings = () => {
                                 e.target.checked
                               )
                             }
-                            disabled={!hasPermission("settings", "appearance")}
+                            disabled={
+                              !(admin?.permissions?.settings?.appearance ?? false)
+                            }
                             className="mb-3"
                           />
                         </Col>
@@ -983,7 +1061,9 @@ const Settings = () => {
                                 e.target.checked
                               )
                             }
-                            disabled={!hasPermission("settings", "appearance")}
+                            disabled={
+                              !(admin?.permissions?.settings?.appearance ?? false)
+                            }
                             className="mb-3"
                           />
                         </Col>
@@ -994,7 +1074,9 @@ const Settings = () => {
                           variant="primary"
                           className="btn-admin-primary me-2"
                           onClick={() => handleSaveSettings("appearance")}
-                          disabled={!hasPermission("settings", "appearance")}
+                          disabled={
+                            !(admin?.permissions?.settings?.appearance ?? false)
+                          }
                         >
                           <i className="fas fa-save me-2"></i>
                           Save Changes
@@ -1002,7 +1084,9 @@ const Settings = () => {
                         <Button
                           variant="outline-secondary"
                           onClick={() => resetToDefaults("appearance")}
-                          disabled={!hasPermission("settings", "appearance")}
+                          disabled={
+                            !(admin?.permissions?.settings?.appearance ?? false)
+                          }
                         >
                           <i className="fas fa-undo me-2"></i>
                           Reset to Defaults

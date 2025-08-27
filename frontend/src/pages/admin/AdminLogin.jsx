@@ -32,19 +32,9 @@ const AdminLogin = () => {
       });
 
       if (response.success) {
-        localStorage.setItem('adminAccessToken', response.data.accessToken);
-        localStorage.setItem('adminTokenExpiresIn', response.data.tokenExpiresIn);
-        
-        const adminResponse = await adminApi.getMe();
-        if (adminResponse.success) {
-          login(adminResponse.data.admin, response.data.accessToken, response.data.tokenExpiresIn);
-          showSuccess(response.message || `Welcome back, ${adminResponse.data.admin.name}!`);
-          navigate("/admin/dashboard");
-        } else {
-          login(response.data.admin, response.data.accessToken, response.data.tokenExpiresIn);
-          showSuccess(response.message || `Welcome back, ${response.data.admin.name}!`);
-          navigate("/admin/dashboard");
-        }
+        await login(response.data.admin, response.data.accessToken, response.data.tokenExpiresIn);
+        showSuccess(response.message || `Welcome back, ${response.data.admin.name}!`);
+        navigate("/admin/dashboard");
       } else {
         showError(response.message || "Login failed");
       }
@@ -124,7 +114,7 @@ const AdminLogin = () => {
         </Container>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .admin-login-bg {
           background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
           min-height: 100vh;

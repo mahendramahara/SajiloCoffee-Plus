@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Navbar, Nav, Dropdown, Badge, Form, Button } from "react-bootstrap";
-import { useAuth } from "../../context/useAuth";
+import { useAdminAuth } from "../../context/AdminAuthContext";
 import { useNavigate } from "react-router-dom";
 import analyticsData from "../../api/analytics.json";
 
 const AdminHeader = ({ onSidebarToggle }) => {
-  const { currentUser, logout } = useAuth();
+  const { admin, logout } = useAdminAuth();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -166,14 +166,14 @@ const AdminHeader = ({ onSidebarToggle }) => {
             >
               <div className="user-info-header">
                 <img
-                  src={currentUser?.avatar || "/images/avatars/default.png"}
-                  alt={currentUser?.name}
+                  src={admin?.avatar || "/images/avatars/default.png"}
+                  alt={admin?.name}
                   className="user-avatar-header"
                 />
                 <div className="user-details">
-                  <span className="user-name">{currentUser?.name}</span>
+                  <span className="user-name">{admin?.name}</span>
                   <small className="user-role text-muted text-capitalize">
-                    {currentUser?.role}
+                    {admin?.role}
                   </small>
                 </div>
               </div>
@@ -183,12 +183,12 @@ const AdminHeader = ({ onSidebarToggle }) => {
               <Dropdown.Header>
                 <div className="text-center">
                   <img
-                    src={currentUser?.avatar || "/images/avatars/default.png"}
-                    alt={currentUser?.name}
+                    src={admin?.avatar || "/images/avatars/default.png"}
+                    alt={admin?.name}
                     className="user-avatar-large rounded-circle mb-2"
                   />
-                  <div className="fw-semibold">{currentUser?.name}</div>
-                  <small className="text-muted">{currentUser?.email}</small>
+                  <div className="fw-semibold">{admin?.name}</div>
+                  <small className="text-muted">{admin?.email}</small>
                 </div>
               </Dropdown.Header>
               <Dropdown.Divider />

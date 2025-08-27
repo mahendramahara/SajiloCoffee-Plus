@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { adminApi } from '../api/adminApi';
 
 const AdminAuthContext = createContext();
 
@@ -38,23 +37,12 @@ export const AdminAuthProvider = ({ children }) => {
   }, []);
 
   const login = async (adminData, token, tokenExpiresIn) => {
-    localStorage.setItem("adminAccessToken", token);
-    localStorage.setItem("adminTokenExpiresIn", tokenExpiresIn);
     setAccessToken(token);
     setIsLoggedIn(true);
-    
-    // Fetch complete admin data including profile
-    try {
-      const response = await adminApi.getMe();
-      const completeAdminData = response.data.admin;
-      localStorage.setItem("admin", JSON.stringify(completeAdminData));
-      setAdmin(completeAdminData);
-    } catch (error) {
-      console.error("Error fetching complete admin data:", error);
-      // Fallback to provided adminData if API fails
-      localStorage.setItem("admin", JSON.stringify(adminData));
-      setAdmin(adminData);
-    }
+    localStorage.setItem("adminAccessToken", token);
+    localStorage.setItem("adminTokenExpiresIn", tokenExpiresIn);
+    localStorage.setItem("admin", JSON.stringify(adminData));
+    setAdmin(adminData);
   };
 
   const logout = () => {

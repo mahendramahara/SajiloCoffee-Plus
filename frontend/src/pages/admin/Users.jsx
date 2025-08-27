@@ -12,13 +12,13 @@ import {
   Pagination,
   InputGroup,
 } from "react-bootstrap";
-import { useAuth } from "../../context/useAuth";
+import { useAdminAuth } from "../../context/AdminAuthContext";
 import { showNotification } from "../../utils/notify";
 import usersData from "../../api/users.json";
 import subscriptionsData from "../../api/subscriptions.json";
 
 const UserManagement = () => {
-  const { hasPermission } = useAuth();
+  const { admin } = useAdminAuth();
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -92,7 +92,7 @@ const UserManagement = () => {
   };
 
   const suspendUser = (userId) => {
-    if (!hasPermission("users", "suspend")) {
+    if (!(admin?.permissions?.users?.suspend ?? false)) {
       showNotification.error("You do not have permission to suspend users");
       return;
     }
@@ -110,7 +110,7 @@ const UserManagement = () => {
   };
 
   const activateUser = (userId) => {
-    if (!hasPermission("users", "update")) {
+    if (!(admin?.permissions?.users?.update ?? false)) {
       showNotification.error("You do not have permission to activate users");
       return;
     }
@@ -380,7 +380,7 @@ const UserManagement = () => {
                         <i className="fas fa-eye"></i>
                       </Button>
 
-                      {hasPermission("users", "suspend") &&
+                      {admin?.permissions?.users?.suspend !== undefined &&
                         (user.suspended ? (
                           <Button
                             variant="outline-success"

@@ -42,7 +42,6 @@ const AdminRoutesContent = () => {
         }
       >
         <Route index element={<Navigate to="/admin/dashboard" replace />} />
-        <Route index element={<Navigate to="/admin/dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="products" element={<ProductManagement />} />
         <Route path="orders" element={<OrderManagement />} />

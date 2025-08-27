@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Table, Badge, ProgressBar } from "react-bootstrap";
 import { Line, Doughnut, Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement, BarElement } from "chart.js";
-import StatsCard from "../../components/admin/Dashboard/StatsCard";
-import ChartCard from "../../components/admin/Dashboard/ChartCard";
 import { useAdminAuth } from "../../context/AdminAuthContext";
 import { adminApi } from "../../api/adminApi";
 
@@ -87,68 +85,124 @@ const Dashboard = () => {
 
       <Row className="stats-row mb-3">
         <Col lg={4} md={6} sm={12} className="mb-3">
-          <StatsCard
-            title="Total Orders"
-            value={dashboardData?.overview?.total?.orders || 0}
-            icon="fa-shopping-cart"
-            bgColor="bg-primary"
-          />
+          <Card className="stats-card h-100 bg-primary text-white">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 className="card-title">Total Orders</h5>
+                  <h2 className="card-value">{dashboardData?.overview?.total?.orders || 0}</h2>
+                </div>
+                <div className="icon-container">
+                  <i className="fas fa-shopping-cart fa-3x"></i>
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
         </Col>
         <Col lg={4} md={6} sm={12} className="mb-3">
-          <StatsCard
-            title="Total Users"
-            value={dashboardData?.overview?.total?.users || 0}
-            icon="fa-users"
-            bgColor="bg-success"
-          />
+          <Card className="stats-card h-100 bg-success text-white">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 className="card-title">Total Users</h5>
+                  <h2 className="card-value">{dashboardData?.overview?.total?.users || 0}</h2>
+                </div>
+                <div className="icon-container">
+                  <i className="fas fa-users fa-3x"></i>
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
         </Col>
         <Col lg={4} md={6} sm={12} className="mb-3">
-          <StatsCard
-            title="Total Revenue"
-            value={`₨${(dashboardData?.overview?.total?.revenue || 0).toLocaleString()}`}
-            icon="fa-dollar-sign"
-            bgColor="bg-info"
-          />
+          <Card className="stats-card h-100 bg-info text-white">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 className="card-title">Total Revenue</h5>
+                  <h2 className="card-value">₨{(dashboardData?.overview?.total?.revenue || 0).toLocaleString()}</h2>
+                </div>
+                <div className="icon-container">
+                  <i className="fas fa-dollar-sign fa-3x"></i>
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
 
       <Row className="stats-row mb-3">
         <Col lg={4} md={6} sm={12} className="mb-3">
-          <StatsCard
-            title="Active Subscriptions"
-            value={dashboardData?.overview?.total?.activeSubscriptions || 0}
-            icon="fa-crown"
-            bgColor="bg-warning"
-          />
+          <Card className="stats-card h-100 bg-warning text-white">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 className="card-title">Active Subscriptions</h5>
+                  <h2 className="card-value">{dashboardData?.overview?.total?.activeSubscriptions || 0}</h2>
+                </div>
+                <div className="icon-container">
+                  <i className="fas fa-crown fa-3x"></i>
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
         </Col>
         <Col lg={4} md={6} sm={12} className="mb-3">
-          <StatsCard
-            title="Today's Orders"
-            value={dashboardData?.overview?.today?.orders || 0}
-            icon="fa-clock"
-            bgColor="bg-danger"
-          />
+          <Card className="stats-card h-100 bg-danger text-white">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 className="card-title">Today's Orders</h5>
+                  <h2 className="card-value">{dashboardData?.overview?.today?.orders || 0}</h2>
+                </div>
+                <div className="icon-container">
+                  <i className="fas fa-clock fa-3x"></i>
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
         </Col>
         <Col lg={4} md={6} sm={12} className="mb-3">
-          <StatsCard
-            title="Pending Orders"
-            value={dashboardData?.orders?.statusDistribution?.find(s => s._id === 'pending')?.count || 0}
-            icon="fa-hourglass-half"
-            bgColor="bg-secondary"
-          />
+          <Card className="stats-card h-100 bg-secondary text-white">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 className="card-title">Pending Orders</h5>
+                  <h2 className="card-value">{dashboardData?.orders?.statusDistribution?.find(s => s._id === 'pending')?.count || 0}</h2>
+                </div>
+                <div className="icon-container">
+                  <i className="fas fa-hourglass-half fa-3x"></i>
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
 
       <Row className="charts-row mb-3">
         <Col lg={8} className="mb-3">
-          <ChartCard title="Sales Overview" height="250px">
-            <Line data={salesChartData} options={chartOptions} />
-          </ChartCard>
+          <Card className="chart-card h-100">
+            <Card.Header>
+              <h5 className="card-title">Sales Overview</h5>
+            </Card.Header>
+            <Card.Body>
+              <div style={{ position: "relative", height: "250px" }}>
+                <Line data={salesChartData} options={chartOptions} />
+              </div>
+            </Card.Body>
+          </Card>
         </Col>
         <Col lg={4} className="mb-3">
-          <ChartCard title="Order Status" height="250px">
-            <Doughnut data={orderStatusData} options={chartOptions} />
-          </ChartCard>
+          <Card className="chart-card h-100">
+            <Card.Header>
+              <h5 className="card-title">Order Status</h5>
+            </Card.Header>
+            <Card.Body>
+              <div style={{ position: "relative", height: "250px" }}>
+                <Doughnut data={orderStatusData} options={chartOptions} />
+              </div>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
 
@@ -224,9 +278,16 @@ const Dashboard = () => {
 
       <Row>
         <Col lg={12}>
-          <ChartCard title="Product Categories Performance" height="300px">
-            <Bar data={productCategoryData} options={chartOptions} />
-          </ChartCard>
+          <Card className="chart-card h-100">
+            <Card.Header>
+              <h5 className="card-title">Product Categories Performance</h5>
+            </Card.Header>
+            <Card.Body>
+              <div style={{ position: "relative", height: "300px" }}>
+                <Bar data={productCategoryData} options={chartOptions} />
+              </div>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </Container>

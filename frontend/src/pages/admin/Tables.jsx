@@ -10,13 +10,13 @@ import {
   Modal,
   Form,
 } from "react-bootstrap";
-import { useAuth } from "../../context/useAuth";
+import { useAdminAuth } from "../../context/AdminAuthContext";
 import { showNotification } from "../../utils/notify";
 import tablesData from "../../api/tables.json";
 import ordersData from "../../api/orders.json";
 
 const TableManagement = () => {
-  const { hasPermission } = useAuth();
+  const { admin } = useAdminAuth();
   const [tables, setTables] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [newTableData, setNewTableData] = useState({
@@ -61,7 +61,7 @@ const TableManagement = () => {
   };
 
   const handleStatusChange = (tableNumber, newStatus) => {
-    if (!hasPermission("settings", "tables")) {
+    if (!(admin?.permissions?.tables?.update ?? false)) {
       showNotification.error(
         "You do not have permission to update table status"
       );
@@ -87,7 +87,7 @@ const TableManagement = () => {
   };
 
   const handleAddTable = () => {
-    if (!hasPermission("settings", "tables")) {
+    if (!(admin?.permissions?.tables?.create ?? false)) {
       showNotification.error("You do not have permission to add tables");
       return;
     }
@@ -149,7 +149,7 @@ const TableManagement = () => {
             Manage restaurant seating and table assignments
           </p>
         </div>
-        {hasPermission("settings", "tables") && (
+        {(admin?.permissions?.tables?.create ?? false) && (
           <Button
             variant="primary"
             className="btn-admin-primary"
@@ -348,7 +348,11 @@ const TableManagement = () => {
                                     "occupied"
                                   )
                                 }
-                                disabled={!hasPermission("settings", "tables")}
+                                disabled={
+                                  !(
+                                    admin?.permissions?.tables?.update ?? false
+                                  )
+                                }
                               >
                                 Mark Occupied
                               </Button>
@@ -361,7 +365,11 @@ const TableManagement = () => {
                                     "reserved"
                                   )
                                 }
-                                disabled={!hasPermission("settings", "tables")}
+                                disabled={
+                                  !(
+                                    admin?.permissions?.tables?.update ?? false
+                                  )
+                                }
                               >
                                 Reserve
                               </Button>
@@ -378,7 +386,11 @@ const TableManagement = () => {
                                   "available"
                                 )
                               }
-                              disabled={!hasPermission("settings", "tables")}
+                              disabled={
+                                !(
+                                  admin?.permissions?.tables?.update ?? false
+                                )
+                              }
                             >
                               Clear Table
                             </Button>
@@ -395,7 +407,11 @@ const TableManagement = () => {
                                     "occupied"
                                   )
                                 }
-                                disabled={!hasPermission("settings", "tables")}
+                                disabled={
+                                  !(
+                                    admin?.permissions?.tables?.update ?? false
+                                  )
+                                }
                               >
                                 Check In
                               </Button>
@@ -408,7 +424,11 @@ const TableManagement = () => {
                                     "available"
                                   )
                                 }
-                                disabled={!hasPermission("settings", "tables")}
+                                disabled={
+                                  !(
+                                    admin?.permissions?.tables?.update ?? false
+                                  )
+                                }
                               >
                                 Cancel Reservation
                               </Button>
@@ -425,7 +445,11 @@ const TableManagement = () => {
                                   "maintenance"
                                 )
                               }
-                              disabled={!hasPermission("settings", "tables")}
+                              disabled={
+                                !(
+                                  admin?.permissions?.tables?.update ?? false
+                                )
+                              }
                             >
                               Maintenance
                             </Button>
@@ -441,7 +465,11 @@ const TableManagement = () => {
                                   "available"
                                 )
                               }
-                              disabled={!hasPermission("settings", "tables")}
+                              disabled={
+                                !(
+                                  admin?.permissions?.tables?.update ?? false
+                                )
+                              }
                             >
                               Back to Service
                             </Button>

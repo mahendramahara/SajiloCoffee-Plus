@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Container, Row, Col, Card, Badge, Pagination, InputGroup, Form } from "react-bootstrap";
-import { useAuth } from "../../context/useAuth";
+import { useAdminAuth } from "../../context/AdminAuthContext";
 import { showNotification } from "../../utils/notify";
-import StatsCard from "../../components/admin/Dashboard/StatsCard";
 import OrdersTable from "../../components/admin/Orders/OrdersTable";
 import OrderDetailsModal from "../../components/admin/orders/OrderDetailsModal";
 import { adminApi } from "../../api/adminApi";
 
 const OrderManagement = () => {
-  const { hasPermission } = useAuth();
+  const { admin } = useAdminAuth();
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -83,7 +82,7 @@ const OrderManagement = () => {
   };
 
   const updateOrderStatus = async (orderId, newStatus) => {
-    if (!hasPermission("orders", "update")) {
+    if (!(admin?.permissions?.orders?.update ?? false)) {
       showNotification.error("You do not have permission to update orders");
       return;
     }
@@ -105,7 +104,7 @@ const OrderManagement = () => {
   };
 
   const deleteOrder = async (orderId) => {
-    if (!hasPermission("orders", "delete")) {
+    if (!(admin?.permissions?.orders?.delete ?? false)) {
       showNotification.error("You do not have permission to delete orders");
       return;
     }
@@ -154,7 +153,7 @@ const OrderManagement = () => {
 
       <Row className="mb-4">
         <Col md={2} className="mb-3">
-          <StatsCard
+          <Card
             title="Total Orders"
             value={filteredOrders.length}
             icon="fa-shopping-cart"
@@ -162,7 +161,7 @@ const OrderManagement = () => {
           />
         </Col>
         <Col md={2} className="mb-3">
-          <StatsCard
+          <Card
             title="Pending"
             value={stats.pendingOrders || 0}
             icon="fa-clock"
@@ -170,7 +169,7 @@ const OrderManagement = () => {
           />
         </Col>
         <Col md={2} className="mb-3">
-          <StatsCard
+          <Card
             title="Preparing"
             value={stats.preparingOrders || 0}
             icon="fa-fire"
@@ -178,7 +177,7 @@ const OrderManagement = () => {
           />
         </Col>
         <Col md={2} className="mb-3">
-          <StatsCard
+          <Card
             title="Served"
             value={filteredOrders.filter(o => o.status === "served").length}
             icon="fa-check"
@@ -186,7 +185,7 @@ const OrderManagement = () => {
           />
         </Col>
         <Col md={2} className="mb-3">
-          <StatsCard
+          <Card
             title="Cancelled"
             value={filteredOrders.filter(o => o.status === "cancelled").length}
             icon="fa-times"
@@ -194,7 +193,7 @@ const OrderManagement = () => {
           />
         </Col>
         <Col md={2} className="mb-3">
-          <StatsCard
+          <Card
             title="Revenue"
             value={`₨${getTotalRevenue().toLocaleString()}`}
             icon="fa-rupee-sign"
@@ -255,7 +254,7 @@ const OrderManagement = () => {
             onShowDetails={handleShowDetails}
             onUpdateStatus={updateOrderStatus}
             onDeleteOrder={deleteOrder}
-            hasPermission={hasPermission}
+            hasPermission={(action) => admin?.permissions?.orders?.[action] ?? false}
           />
 
           {totalPages > 1 && (

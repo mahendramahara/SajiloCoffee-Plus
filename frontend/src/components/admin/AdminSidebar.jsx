@@ -1,11 +1,11 @@
 import React from "react";
 import { Nav, Navbar, Badge } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/useAuth";
+import { useAdminAuth } from "../../context/AdminAuthContext";
 import { showNotification } from "../../utils/notify";
 
 const AdminSidebar = ({ isCollapsed, isVisible, onToggle }) => {
-  const { currentUser, logout, hasPermission } = useAuth();
+  const { admin, logout } = useAdminAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -82,7 +82,7 @@ const AdminSidebar = ({ isCollapsed, isVisible, onToggle }) => {
   const hasPermissionToAccess = (permission) => {
     if (!permission) return true;
     const [resource, action] = permission.split(".");
-    return hasPermission(resource, action);
+    return admin?.permissions?.[resource]?.[action] ?? false;
   };
 
   return (
@@ -119,17 +119,17 @@ const AdminSidebar = ({ isCollapsed, isVisible, onToggle }) => {
       <div className="sidebar-user">
         <div className="user-avatar">
           <img
-            src={currentUser?.avatar || "/images/avatars/default.png"}
-            alt={currentUser?.name}
+            src={admin?.avatar || "/images/avatars/default.png"}
+            alt={admin?.name}
             className="rounded-circle"
           />
           <div className="user-status"></div>
         </div>
         {!isCollapsed && (
           <div className="user-info">
-            <h6 className="mb-0">{currentUser?.name}</h6>
+            <h6 className="mb-0">{admin?.name}</h6>
             <small className="text-muted text-capitalize">
-              {currentUser?.role}
+              {admin?.role}
             </small>
           </div>
         )}

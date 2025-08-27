@@ -12,11 +12,11 @@ import {
   Dropdown,
   InputGroup,
 } from "react-bootstrap";
-import { useAuth } from "../../context/useAuth";
+import { useAdminAuth } from "../../context/AdminAuthContext";
 import adminsData from "../../api/admins.json";
 
 const AdminManagement = () => {
-  const { hasPermission, currentUser } = useAuth();
+  const { admin } = useAdminAuth();
   const [admins, setAdmins] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedAdmin, setSelectedAdmin] = useState(null);
@@ -24,9 +24,9 @@ const AdminManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [departmentFilter, setDepartmentFilter] = useState("all");
 
-  const canCreateAdmin = hasPermission("admins", "create");
-  const canUpdateAdmin = hasPermission("admins", "update");
-  const canDeleteAdmin = hasPermission("admins", "delete");
+  const canCreateAdmin = admin?.permissions?.admins?.create ?? false;
+  const canUpdateAdmin = admin?.permissions?.admins?.update ?? false;
+  const canDeleteAdmin = admin?.permissions?.admins?.delete ?? false;
 
   useEffect(() => {
     setAdmins(adminsData);
@@ -283,7 +283,7 @@ const AdminManagement = () => {
                             Edit Permissions
                           </Dropdown.Item>
                         )}
-                        {canDeleteAdmin && admin.id !== currentUser?.id && (
+                        {canDeleteAdmin && admin.id !== admin?.id && (
                           <>
                             <Dropdown.Divider />
                             <Dropdown.Item className="text-danger">
