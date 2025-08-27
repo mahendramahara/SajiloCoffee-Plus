@@ -1,0 +1,194 @@
+[
+  {
+    "name": "Nepali Espresso",
+    "slug": "nepali-espresso",
+    "description": "Traditional Nepali coffee beans roasted to perfection with bold espresso shot",
+    "category": "espresso",
+    "price": 120,
+    "sizes": [
+      { "size": "Single Shot", "price": 120 },
+      { "size": "Double Shot", "price": 200 }
+    ],
+    "image": "/uploads/products/nepali-espresso.jpg",
+    "available": true,
+    "tags": ["strong", "traditional", "pure"],
+    "ratingAverage": 4.5,
+    "ratingCount": 25
+  },
+  {
+    "name": "Himalayan Cappuccino",
+    "slug": "himalayan-cappuccino",
+    "description": "Creamy cappuccino made with high-altitude Himalayan coffee beans and fresh milk foam",
+    "category": "milk",
+    "price": 180,
+    "sizes": [
+      { "size": "Regular", "price": 180 },
+      { "size": "Large", "price": 250 }
+    ],
+    "image": "/uploads/products/himalayan-cappuccino.jpg",
+    "available": true,
+    "tags": ["creamy", "foam", "himalayan"],
+    "ratingAverage": 4.7,
+    "ratingCount": 32
+  },
+  {
+    "name": "Kathmandu Latte",
+    "slug": "kathmandu-latte",
+    "description": "Smooth latte inspired by the bustling streets of Kathmandu with steamed milk",
+    "category": "milk",
+    "price": 200,
+    "sizes": [
+      { "size": "Regular", "price": 200 },
+      { "size": "Large", "price": 280 }
+    ],
+    "image": "/uploads/products/kathmandu-latte.jpg",
+    "available": true,
+    "tags": ["smooth", "creamy", "kathmandu"],
+    "ratingAverage": 4.3,
+    "ratingCount": 18
+  },
+  {
+    "name": "Mustang Black Coffee",
+    "slug": "mustang-black-coffee",
+    "description": "Bold black coffee from the highlands of Mustang region, served hot",
+    "category": "espresso",
+    "price": 150,
+    "sizes": [
+      { "size": "Regular", "price": 150 },
+      { "size": "Large", "price": 220 }
+    ],
+    "image": "/uploads/products/mustang-black.jpg",
+    "available": true,
+    "tags": ["bold", "black", "mustang"],
+    "ratingAverage": 4.2,
+    "ratingCount": 15
+  },
+  {
+    "name": "Everest Cold Brew",
+    "slug": "everest-cold-brew",
+    "description": "Refreshing cold brew inspired by the cool mountain air of Everest region",
+    "category": "cold",
+    "price": 220,
+    "sizes": [
+      { "size": "Regular", "price": 220 },
+      { "size": "Large", "price": 320 }
+    ],
+    "image": "/uploads/products/everest-cold-brew.jpg",
+    "available": true,
+    "tags": ["cold", "refreshing", "everest"],
+    "ratingAverage": 4.6,
+    "ratingCount": 28
+  },
+  {
+    "name": "Pokhara Iced Coffee",
+    "slug": "pokhara-iced-coffee",
+    "description": "Cool iced coffee perfect for the lakeside atmosphere of Pokhara",
+    "category": "cold",
+    "price": 190,
+    "sizes": [
+      { "size": "Regular", "price": 190 },
+      { "size": "Large", "price": 270 }
+    ],
+    "image": "/uploads/products/pokhara-iced.jpg",
+    "available": true,
+    "tags": ["iced", "lakeside", "pokhara"],
+    "ratingAverage": 4.1,
+    "ratingCount": 22
+  },
+  {
+    "name": "Yak Butter Coffee",
+    "slug": "yak-butter-coffee",
+    "description": "Traditional Himalayan style coffee with yak butter and special spices",
+    "category": "specialty",
+    "price": 280,
+    "sizes": [
+      { "size": "Regular", "price": 280 },
+      { "size": "Large", "price": 380 }
+    ],
+    "image": "/uploads/products/yak-butter-coffee.jpg",
+    "available": true,
+    "tags": ["traditional", "yak-butter", "himalayan"],
+    "ratingAverage": 4.4,
+    "ratingCount": 12
+  },
+  {
+    "name": "Rhododendron Honey Latte",
+    "slug": "rhododendron-honey-latte",
+    "description": "Sweet latte infused with Nepal's famous rhododendron honey",
+    "category": "specialty",
+    "price": 260,
+    "sizes": [
+      { "size": "Regular", "price": 260 },
+      { "size": "Large", "price": 350 }
+    ],
+    "image": "/uploads/products/rhododendron-honey-latte.jpg",
+    "available": true,
+    "tags": ["honey", "sweet", "rhododendron"],
+    "ratingAverage": 4.8,
+    "ratingCount": 35
+  },
+  {
+    "name": "Chitwan Mocha",
+    "slug": "chitwan-mocha",
+    "description": "Rich chocolate mocha inspired by the lush forests of Chitwan National Park",
+    "category": "specialty",
+    "price": 270,
+    "sizes": [
+      { "size": "Regular", "price": 270 },
+      { "size": "Large", "price": 370 }
+    ],
+    "image": "/uploads/products/chitwan-mocha.jpg",
+    "available": true,
+    "tags": ["chocolate", "mocha", "chitwan"],
+    "ratingAverage": 4.5,
+    "ratingCount": 20
+  },
+  {
+    "name": "Himalayan Masala Chai",
+    "slug": "himalayan-masala-chai",
+    "description": "Traditional Nepali spiced tea with cardamom, ginger, and local mountain spices",
+    "category": "tea",
+    "price": 100,
+    "sizes": [
+      { "size": "Regular", "price": 100 },
+      { "size": "Large", "price": 150 }
+    ],
+    "image": "/uploads/products/himalayan-masala-chai.jpg",
+    "available": true,
+    "tags": ["spiced", "traditional", "himalayan"],
+    "ratingAverage": 4.7,
+    "ratingCount": 45
+  },
+  {
+    "name": "Ilam Green Tea",
+    "slug": "ilam-green-tea",
+    "description": "Premium green tea from the famous tea gardens of Ilam district",
+    "category": "tea",
+    "price": 80,
+    "sizes": [
+      { "size": "Regular", "price": 80 },
+      { "size": "Large", "price": 120 }
+    ],
+    "image": "/uploads/products/ilam-green-tea.jpg",
+    "available": true,
+    "tags": ["green-tea", "ilam", "premium"],
+    "ratingAverage": 4.3,
+    "ratingCount": 18
+  },
+  {
+    "name": "Dhankuta Black Tea",
+    "slug": "dhankuta-black-tea",
+    "description": "Strong black tea from the hills of Dhankuta with rich flavor and aroma",
+    "category": "tea",
+    "price": 90,
+    "sizes": [
+      { "size": "Regular", "price": 90 },
+      { "size": "Large", "price": 130 }
+    ],
+    "image": "/uploads/products/dhankuta-black-tea.jpg",
+    "available": true,
+    "tags": ["black-tea", "dhankuta", "strong"],
+    "ratingAverage": 4.2,
+    "ratingCount": 14
+  }
+]

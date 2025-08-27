@@ -18,12 +18,12 @@ const router = Router();
 
 router.get('/plans', getSubscriptionPlans);
 
-router.get('/my-subscription', verifyJWT, verifyUser, getMySubscription);
+router.get('/my', verifyJWT, verifyUser, getMySubscription);
 router.post('/subscribe', verifyJWT, verifyUser, subscribeToPlanValidation, subscribeToPlan);
-router.put('/cancel', verifyJWT, verifyUser, cancelSubscription);
+router.patch('/cancel', verifyJWT, verifyUser, cancelSubscription);
 router.post('/renew', verifyJWT, verifyUser, renewSubscriptionValidation, renewSubscription);
 
-router.get('/all', verifyJWT, verifyAdmin, getAllSubscriptions);
-router.get('/stats', verifyJWT, verifyAdmin, getSubscriptionStats);
+router.get('/admin/all', verifyJWT, verifyAdmin, getAllSubscriptions);
+router.get('/admin/stats', verifyJWT, verifyAdmin, getSubscriptionStats);
 
 export default router;

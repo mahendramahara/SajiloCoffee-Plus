@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { showSuccess, showError } from "../../utils";
+import { register } from "../../api/authApi";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -10,33 +11,19 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    preferences: {
-      sweetness: "medium",
-      strength: "medium",
-      milk: "regular",
-      temperature: "hot",
-    },
+    sweetnessLevel: "Medium",
+    coffeeStrength: "Medium",
+    milkPreference: "Regular Milk",
+    temperature: "Hot",
   });
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    if (name.startsWith("preferences.")) {
-      const prefKey = name.split(".")[1];
-      setFormData({
-        ...formData,
-        preferences: {
-          ...formData.preferences,
-          [prefKey]: value,
-        },
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -56,12 +43,27 @@ const Register = () => {
     }
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const userData = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        sweetnessLevel: formData.sweetnessLevel,
+        coffeeStrength: formData.coffeeStrength,
+        milkPreference: formData.milkPreference,
+        temperature: formData.temperature,
+      };
 
-      showSuccess("Account created successfully! Please log in.");
-      navigate("/login");
-    } catch {
-      showError("Registration failed. Please try again.");
+      const response = await register(userData);
+      
+      if (response.success) {
+        showSuccess(response.message || "Registration successful! Please verify your email.");
+        navigate("/verify-register", { state: { email: formData.email } });
+      } else {
+        showError(response.message || "Registration failed. Please try again.");
+      }
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message || "Registration failed. Please try again.";
+      showError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -145,15 +147,15 @@ const Register = () => {
                 <Form.Group className="mb-3">
                   <Form.Label>Sweetness Level</Form.Label>
                   <Form.Select
-                    name="preferences.sweetness"
-                    value={formData.preferences.sweetness}
+                    name="sweetnessLevel"
+                    value={formData.sweetnessLevel}
                     onChange={handleChange}
                     disabled={isLoading}
                   >
-                    <option value="none">No Sugar</option>
-                    <option value="light">Light</option>
-                    <option value="medium">Medium</option>
-                    <option value="sweet">Sweet</option>
+                    <option value="None">No Sugar</option>
+                    <option value="Light">Light</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Sweet">Sweet</option>
                   </Form.Select>
                 </Form.Group>
               </Col>
@@ -161,14 +163,14 @@ const Register = () => {
                 <Form.Group className="mb-3">
                   <Form.Label>Coffee Strength</Form.Label>
                   <Form.Select
-                    name="preferences.strength"
-                    value={formData.preferences.strength}
+                    name="coffeeStrength"
+                    value={formData.coffeeStrength}
                     onChange={handleChange}
                     disabled={isLoading}
                   >
-                    <option value="mild">Mild</option>
-                    <option value="medium">Medium</option>
-                    <option value="strong">Strong</option>
+                    <option value="Mild">Mild</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Strong">Strong</option>
                   </Form.Select>
                 </Form.Group>
               </Col>
@@ -179,15 +181,17 @@ const Register = () => {
                 <Form.Group className="mb-3">
                   <Form.Label>Milk Preference</Form.Label>
                   <Form.Select
-                    name="preferences.milk"
-                    value={formData.preferences.milk}
+                    name="milkPreference"
+                    value={formData.milkPreference}
                     onChange={handleChange}
                     disabled={isLoading}
                   >
-                    <option value="regular">Regular Milk</option>
-                    <option value="buffalo">Buffalo Milk</option>
-                    <option value="plant">Plant Milk</option>
-                    <option value="none">No Milk</option>
+                    <option value="Regular Milk">Regular Milk</option>
+                    <option value="Buffalo Milk">Buffalo Milk</option>
+                    <option value="Oat Milk">Oat Milk</option>
+                    <option value="Almond Milk">Almond Milk</option>
+                    <option value="Soy Milk">Soy Milk</option>
+                    <option value="No Milk">No Milk</option>
                   </Form.Select>
                 </Form.Group>
               </Col>
@@ -195,15 +199,15 @@ const Register = () => {
                 <Form.Group className="mb-4">
                   <Form.Label>Temperature</Form.Label>
                   <Form.Select
-                    name="preferences.temperature"
-                    value={formData.preferences.temperature}
+                    name="temperature"
+                    value={formData.temperature}
                     onChange={handleChange}
                     disabled={isLoading}
                   >
-                    <option value="hot">Hot</option>
-                    <option value="warm">Warm</option>
-                    <option value="cold">Cold</option>
-                    <option value="iced">Iced</option>
+                    <option value="Hot">Hot</option>
+                    <option value="Warm">Warm</option>
+                    <option value="Cold">Cold</option>
+                    <option value="Iced">Iced</option>
                   </Form.Select>
                 </Form.Group>
               </Col>

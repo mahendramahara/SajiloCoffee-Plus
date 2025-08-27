@@ -1,0 +1,77 @@
+[
+  {
+    "name": "Hari Kumar Poudel",
+    "email": "hari.poudel@sajilocoffeeplus.com",
+    "password": "Admin@1234",
+    "phone": "+977-9841234567",
+    "address": "Thamel, Kathmandu",
+    "isActive": true,
+    "isEmailVerified": true,
+    "coffeePreferences": {
+      "sweetnessLevel": "Medium",
+      "coffeeStrength": "Strong",
+      "milkPreference": "Regular Milk",
+      "temperature": "Hot"
+    }
+  },
+  {
+    "name": "Maya Devi Tamang",
+    "email": "maya.tamang@sajilocoffeeplus.com",
+    "password": "Admin@1234",
+    "phone": "+977-9851234567",
+    "address": "Lakeside, Pokhara",
+    "isActive": true,
+    "isEmailVerified": true,
+    "coffeePreferences": {
+      "sweetnessLevel": "High",
+      "coffeeStrength": "Medium",
+      "milkPreference": "Oat Milk",
+      "temperature": "Hot"
+    }
+  },
+  {
+    "name": "Bijay Shrestha",
+    "email": "bijay.shrestha@sajilocoffeeplus.com",
+    "password": "Admin@1234",
+    "phone": "+977-9861234567",
+    "address": "Patan Dhoka, Lalitpur",
+    "isActive": true,
+    "isEmailVerified": true,
+    "coffeePreferences": {
+      "sweetnessLevel": "Low",
+      "coffeeStrength": "Light",
+      "milkPreference": "Almond Milk",
+      "temperature": "Medium"
+    }
+  },
+  {
+    "name": "Sunita Karki",
+    "email": "sunita.karki@sajilocoffeeplus.com",
+    "password": "Admin@1234",
+    "phone": "+977-9771234567",
+    "address": "New Baneshwor, Kathmandu",
+    "isActive": true,
+    "isEmailVerified": true,
+    "coffeePreferences": {
+      "sweetnessLevel": "Medium",
+      "coffeeStrength": "Strong",
+      "milkPreference": "Regular Milk",
+      "temperature": "Hot"
+    }
+  },
+  {
+    "name": "Ramesh Magar",
+    "email": "ramesh.magar@sajilocoffeeplus.com",
+    "password": "Admin@1234",
+    "phone": "+977-9881234567",
+    "address": "Bhaktapur Durbar Square",
+    "isActive": true,
+    "isEmailVerified": true,
+    "coffeePreferences": {
+      "sweetnessLevel": "High",
+      "coffeeStrength": "Medium",
+      "milkPreference": "Regular Milk",
+      "temperature": "Cold"
+    }
+  }
+]

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Navbar, Nav, Container, Badge, Dropdown } from "react-bootstrap";
-import { useAuth } from "../../context/useAuth";
+import { useAuth } from "../../context/AuthContext";
 
 const Header = () => {
-  const { isLoggedIn, currentUser, logout } = useAuth();
+  const { isLoggedIn, user, logout } = useAuth();
   const navigate = useNavigate();
   const [cartCount] = useState(2);
+
+  const avatarSrc = user?.avatar || "/media/user/image.png";
 
   const handleLogout = () => {
     logout();
@@ -72,11 +74,18 @@ const Header = () => {
                     className="profile-toggle d-flex align-items-center text-decoration-none border-0 bg-transparent p-1"
                     id="profile-dropdown"
                   >
-                    <div className="avatar-sm me-2">
-                      {currentUser?.name?.charAt(0).toUpperCase() || "U"}
+                    <div className="avatar-sm me-2 d-flex align-items-center justify-content-center overflow-hidden rounded-circle" style={{ width: '32px', height: '32px', backgroundColor: '#f8f9fa' }}>
+                      <img 
+                        src={avatarSrc}
+                        alt={user?.name || "User"}
+                        className="w-100 h-100 object-fit-cover"
+                        onError={(e) => {
+                          e.target.src = "/media/user/image.png";
+                        }}
+                      />
                     </div>
                     <span className="profile-name d-none d-md-inline text-start">
-                      {currentUser?.name || "User"}
+                      {user?.name?.split(' ')[0] || "User"}
                     </span>
                     <i className="bi bi-chevron-down ms-1 fs-6"></i>
                   </Dropdown.Toggle>

@@ -11,6 +11,7 @@ import Profile from "../pages/user/Profile";
 import Subscriptions from "../pages/user/Subscriptions";
 import Login from "../pages/user/Login";
 import Register from "../pages/user/Register";
+import VerifyRegister from "../pages/user/VerifyRegister";
 import Recommendations from "../pages/user/Recommendations";
 
 const UserRoutes = () => {
@@ -18,6 +19,7 @@ const UserRoutes = () => {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/verify-register" element={<VerifyRegister />} />
 
       <Route path="/" element={<UserLayout />}>
         <Route index element={<Home />} />

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Ram Bahadur Shrestha",
+    "email": "admin@sajilocoffeeplus.com",
+    "password": "Admin@1234",
+    "role": "admin",
+    "permissions": {
+      "products": { "read": true, "create": true, "update": true, "delete": true, "bulkActions": true },
+      "orders": { "read": true, "create": true, "update": true, "delete": true, "refund": true, "statusChange": true },
+      "users": { "read": true, "create": true, "update": true, "delete": true, "suspend": true, "viewStats": true },
+      "subscriptions": { "read": true, "create": true, "update": true, "delete": true, "analytics": true },
+      "analytics": { "sales": true, "products": true, "users": true, "revenue": true, "export": true },
+      "settings": { "cafe": true, "tables": true, "pricing": true, "notifications": true },
+      "admins": { "read": true, "create": true, "update": true, "delete": true }
+    },
+    "isActive": true,
+    "department": "Management",
+    "employeeId": "EMP001"
+  },
+  {
+    "name": "Sita Kumari Thapa",
+    "email": "manager@sajilocoffeeplus.com",
+    "password": "Admin@1234",
+    "role": "manager",
+    "permissions": {
+      "products": { "read": true, "create": true, "update": true, "delete": false, "bulkActions": false },
+      "orders": { "read": true, "create": true, "update": true, "delete": false, "refund": true, "statusChange": true },
+      "users": { "read": true, "create": false, "update": true, "delete": false, "suspend": true, "viewStats": true },
+      "subscriptions": { "read": true, "create": true, "update": true, "delete": false, "analytics": true },
+      "analytics": { "sales": true, "products": true, "users": true, "revenue": false, "export": false },
+      "settings": { "cafe": false, "tables": true, "pricing": false, "notifications": true },
+      "admins": { "read": true, "create": false, "update": false, "delete": false }
+    },
+    "isActive": true,
+    "department": "Operations",
+    "employeeId": "EMP002"
+  },
+  {
+    "name": "Krishna Prasad Gurung",
+    "email": "staff@sajilocoffeeplus.com",
+    "password": "Admin@1234",
+    "role": "staff",
+    "permissions": {
+      "products": { "read": true, "create": false, "update": false, "delete": false, "bulkActions": false },
+      "orders": { "read": true, "create": true, "update": true, "delete": false, "refund": false, "statusChange": true },
+      "users": { "read": true, "create": false, "update": false, "delete": false, "suspend": false, "viewStats": false },
+      "subscriptions": { "read": true, "create": false, "update": false, "delete": false, "analytics": false },
+      "analytics": { "sales": false, "products": false, "users": false, "revenue": false, "export": false },
+      "settings": { "cafe": false, "tables": false, "pricing": false, "notifications": false },
+      "admins": { "read": false, "create": false, "update": false, "delete": false }
+    },
+    "isActive": true,
+    "department": "Customer Service",
+    "employeeId": "EMP003"
+  }
+]

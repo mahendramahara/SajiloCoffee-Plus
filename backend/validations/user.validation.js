@@ -3,7 +3,11 @@ import { body, param } from 'express-validator';
 export const registerValidation = [
   body('name').notEmpty().withMessage('Name is required').trim(),
   body('email').isEmail().withMessage('Valid email is required').normalizeEmail(),
-  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+  body('sweetnessLevel').optional().trim(),
+  body('coffeeStrength').optional().trim(),
+  body('milkPreference').optional().trim(),
+  body('temperature').optional().trim()
 ];
 
 export const loginValidation = [
@@ -42,9 +46,8 @@ export const changePasswordValidation = [
 
 export const updateUserValidation = [
   body('name').optional().trim(),
-  body('phone').optional().isMobilePhone().withMessage('Valid phone number is required'),
-  body('department').optional().trim(),
-  body('employeeId').optional().trim()
+  body('phone').optional().isLength({ min: 10, max: 15 }).withMessage('Valid phone number is required'),
+  body('address').optional().trim(),
 ];
 
 export const getUserByIdValidation = [

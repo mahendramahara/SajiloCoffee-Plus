@@ -14,7 +14,7 @@ import { checkUserSubscription, applySubscriptionDiscount, getSubscriptionPerks 
 
 export const createOrder = async (req, res) => {
   try {
-    const { tableNumber, items, subscriptionPerkApplied = false } = req.body;
+    const { tableNumber, items, subscriptionPerkApplied = false, orderType = 'dine-in', paymentMethod = 'cash', notes } = req.body;
 
     if (!items || items.length === 0) {
       return validation(res, 'Order must contain at least one item');
@@ -25,13 +25,15 @@ export const createOrder = async (req, res) => {
       return notFound(res, 'Table not found');
     }
 
-    if (table.status === 'occupied') {
+    if (table.status === 'occupied' && orderType === 'dine-in') {
       return validation(res, 'Table is currently occupied');
     }
 
     let subtotal = 0;
     let discount = 0;
+    let subscriptionDiscount = 0;
     const orderItems = [];
+    let subscription = null;
 
     for (const item of items) {
       const product = await Product.findById(item.productId);
@@ -48,42 +50,81 @@ export const createOrder = async (req, res) => {
         unitPrice = sizeInfo.price;
       }
 
-      const itemTotal = unitPrice * item.qty;
+      let addonsCost = 0;
+      const processedAddons = [];
+      
+      if (item.addons && item.addons.length > 0) {
+        for (const addon of item.addons) {
+          addonsCost += addon.price || 0;
+          processedAddons.push({
+            name: addon.name,
+            price: addon.price || 0
+          });
+        }
+      }
+
+      const itemTotal = (unitPrice + addonsCost) * item.qty;
       subtotal += itemTotal;
 
       orderItems.push({
         productId: item.productId,
+        productName: product.name,
+        category: product.category,
         size: item.size,
         qty: item.qty,
-        unitPrice,
-        addons: item.addons || []
+        unitPrice: unitPrice + addonsCost,
+        itemTotal,
+        addons: processedAddons
       });
     }
 
     if (subscriptionPerkApplied) {
-      const subscription = await checkUserSubscription(req.user._id);
-      if (subscription) {
-        discount = applySubscriptionDiscount(subtotal, subscription);
+      subscription = await Subscription.findOne({ 
+        userId: req.user._id, 
+        status: 'active' 
+      }).populate('planId');
+      
+      if (subscription && subscription.planId) {
+        const discountPercent = subscription.planId.perks?.discountPercentage || 0;
+        subscriptionDiscount = Math.round(subtotal * (discountPercent / 100));
+        discount = subscriptionDiscount;
+
+        await Subscription.findByIdAndUpdate(subscription._id, {
+          $inc: { 'usageStats.ordersPlaced': 1, 'usageStats.totalSaved': subscriptionDiscount },
+          'usageStats.lastOrderDate': new Date()
+        });
       }
     }
 
-    const total = subtotal - discount;
+    const tax = Math.round(subtotal * 0.13);
+    const total = subtotal + tax - discount;
 
     const order = new Order({
       userId: req.user._id,
+      customerName: req.user.name,
+      customerEmail: req.user.email,
       table: tableNumber,
       items: orderItems,
+      orderType,
+      paymentMethod,
+      paymentStatus: paymentMethod === 'subscription' ? 'paid' : 'pending',
       subtotal,
+      tax,
       discount,
       total,
-      subscriptionPerkApplied
+      subscriptionId: subscription?._id,
+      subscriptionPerkApplied,
+      subscriptionDiscount,
+      notes: notes?.trim() || ''
     });
 
     await order.save();
 
-    table.status = 'occupied';
-    table.currentOrderId = order._id;
-    await table.save();
+    if (orderType === 'dine-in') {
+      table.status = 'occupied';
+      table.currentOrderId = order._id;
+      await table.save();
+    }
 
     await Cart.findOneAndUpdate(
       { userId: req.user._id },
@@ -91,34 +132,27 @@ export const createOrder = async (req, res) => {
     );
 
     systemLogger.order(order._id, 'created', req.user._id, {
+      orderNumber: order.orderNumber,
       table: tableNumber,
       itemCount: orderItems.length,
       total: total,
-      subscriptionPerkApplied
+      subscriptionPerkApplied,
+      orderType
     });
-
-    createNotification(
-      req.user._id,
-      'Order Placed Successfully',
-      `Your order #${order._id} has been placed for table ${tableNumber}`,
-      'success',
-      { orderId: order._id, table: tableNumber }
-    );
 
     try {
       await sentEmail({
         to: req.user.email,
-        subject: 'Order Confirmation - Sajilo Coffee Plus',
-        html: orderConfirmationTemplate(req.user.name, order)
+        subject: `Order Confirmation - ${order.orderNumber}`,
+        html: orderConfirmationTemplate(order, req.user, orderItems)
       });
-      systemLogger.info('Order confirmation email sent', { orderId: order._id, email: req.user.email });
     } catch (emailError) {
-      systemLogger.error('Order confirmation email failed', emailError, { orderId: order._id });
+      console.log('Email send failed:', emailError);
     }
 
-    const populatedOrder = await Order.findById(order._id).populate('items.productId');
-    return success(res, populatedOrder, 'Order created successfully', 201);
+    return success(res, order, 'Order created successfully', 201);
   } catch (err) {
+    console.error('Create order error:', err);
     return error(res, 'Failed to create order', 500);
   }
 };

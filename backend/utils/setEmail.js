@@ -5,10 +5,12 @@ export const sentEmail = options => {
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
         secure: process.env.SMTP_SECURE === 'true',
-        auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS
-        }
+        auth: process.env.SMTP_USER
+            ? {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS
+            }
+            : undefined
     });
 
     const mailOptions = {
@@ -17,7 +19,7 @@ export const sentEmail = options => {
         subject: options.subject,
         text: options.text,
         html: options.html,
-        
+
     };
 
     return transporter.sendMail(mailOptions);

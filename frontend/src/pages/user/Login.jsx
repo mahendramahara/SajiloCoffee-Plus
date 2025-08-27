@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Alert } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/useAuth";
+import { useAuth } from "../../context/AuthContext";
 import { showSuccess, showError } from "../../utils";
+import { login as loginAPI, getMe } from "../../api/authApi";
 
 const Login = () => {
-  const { login, loginAsUser } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -25,31 +26,31 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const result = await login(formData.email, formData.password, "user");
+      const response = await loginAPI({
+        email: formData.email,
+        password: formData.password,
+      });
 
-      if (result.success) {
-        showSuccess(`Welcome back, ${result.user.name}!`);
-        navigate("/");
+      if (response.success) {
+        localStorage.setItem('accessToken', response.data.accessToken);
+        localStorage.setItem('tokenExpiresIn', response.data.tokenExpiresIn);
+        
+        const userResponse = await getMe();
+        if (userResponse.success) {
+          login(userResponse.data.user, response.data.accessToken, response.data.tokenExpiresIn);
+          showSuccess(response.message || `Welcome back, ${userResponse.data.user.name}!`);
+          navigate("/");
+        } else {
+          login(response.data.user, response.data.accessToken, response.data.tokenExpiresIn);
+          showSuccess(response.message || `Welcome back, ${response.data.user.name}!`);
+          navigate("/");
+        }
       } else {
-        showError(result.error || "Login failed");
+        showError(response.message || "Login failed");
       }
-    } catch {
-      showError("An error occurred during login");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleQuickLogin = async () => {
-    setIsLoading(true);
-    try {
-      const result = await loginAsUser();
-      if (result.success) {
-        showSuccess(`Welcome back, ${result.user.name}!`);
-        navigate("/");
-      }
-    } catch {
-      showError("Quick login failed");
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message || "Login failed. Please try again.";
+      showError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -100,20 +101,16 @@ const Login = () => {
             </Button>
           </Form>
 
-          <div className="text-center mb-3">
-            <span className="text-muted">or</span>
-          </div>
-
-          <Button
-            variant="outline-secondary"
-            className="w-100 mb-3"
-            onClick={handleQuickLogin}
-            disabled={isLoading}
-          >
-            Quick Login (Demo)
-          </Button>
-
           <hr className="my-4" />
+
+          <div className="text-center mb-3">
+            <p className="text-muted">
+              Looking for admin access?{" "}
+              <Link to="/admin/login" className="text-decoration-none">
+                Admin Login
+              </Link>
+            </p>
+          </div>
 
           <div className="text-center">
             <p className="text-muted mb-0">
@@ -122,17 +119,6 @@ const Login = () => {
                 Sign up here
               </Link>
             </p>
-          </div>
-
-          <div className="mt-4 p-3 bg-light rounded">
-            <h6 className="fw-semibold mb-2">Demo Accounts:</h6>
-            <small className="text-muted d-block">
-              Email: rajesh@example.com
-            </small>
-            <small className="text-muted d-block">
-              Email: sita@example.com
-            </small>
-            <small className="text-muted">Password: Any password works</small>
           </div>
         </div>
       </Container>

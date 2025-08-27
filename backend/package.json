@@ -7,7 +7,8 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon main.js",
-    "dev": "nodemon main.js"
+    "dev": "nodemon main.js",
+    "seed": "node ./data/seeder.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,7 @@
   "homepage": "https://github.com/mahendramahara/SajiloCoffee-Plus#readme",
   "dependencies": {
     "bcryptjs": "^3.0.2",
-    "cloudinary": "^2.7.0",
+    "cloudinary": "^1.41.3",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",

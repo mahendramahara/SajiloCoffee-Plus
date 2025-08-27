@@ -1,8 +1,9 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { AdminAuthProvider, useAdminAuth } from "../context/AdminAuthContext";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminLayout from "../layouts/AdminLayout";
-import AdminLogin from "../pages/admin/Login";
+import AdminLogin from "../pages/admin/AdminLogin";
 import Dashboard from "../pages/admin/Dashboard";
 import ProductManagement from "../pages/admin/Products";
 import OrderManagement from "../pages/admin/Orders";
@@ -13,12 +14,9 @@ import Analytics from "../pages/admin/Analytics";
 import TableManagement from "../pages/admin/Tables";
 import Settings from "../pages/admin/Settings";
 import Profile from "../pages/admin/Profile";
-import { useAuth } from "../context/useAuth";
 
-const AdminRoutes = () => {
-  const { currentUser } = useAuth();
-
-  const isAdminAuthenticated = currentUser && currentUser.role === "admin";
+const AdminRoutesContent = () => {
+  const { isLoggedIn } = useAdminAuth();
 
   return (
     <Routes>
@@ -27,7 +25,7 @@ const AdminRoutes = () => {
       <Route
         path="/"
         element={
-          isAdminAuthenticated ? (
+          isLoggedIn ? (
             <Navigate to="/admin/dashboard" replace />
           ) : (
             <Navigate to="/admin/login" replace />
@@ -44,6 +42,7 @@ const AdminRoutes = () => {
         }
       >
         <Route index element={<Navigate to="/admin/dashboard" replace />} />
+        <Route index element={<Navigate to="/admin/dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="products" element={<ProductManagement />} />
         <Route path="orders" element={<OrderManagement />} />
@@ -56,6 +55,14 @@ const AdminRoutes = () => {
         <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>
+  );
+};
+
+const AdminRoutes = () => {
+  return (
+    <AdminAuthProvider>
+      <AdminRoutesContent />
+    </AdminAuthProvider>
   );
 };
 

@@ -47,11 +47,17 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-});
+try {
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET
+    });
+    
+    console.log("Cloudinary configured successfully");
+} catch (error) {
+    console.error("Cloudinary configuration error:", error);
+}
 
 const storage = new CloudinaryStorage({
     cloudinary,
@@ -70,13 +76,22 @@ const storage = new CloudinaryStorage({
             "heic", "HEIC",
             "avif", "AVIF"
         ],
-        public_id: (req, file) => file.originalname.split(".")[0] + "_" + Date.now()
+        public_id: (req, file) => {
+            const fileName = file.originalname.split(".")[0] + "_" + Date.now();
+            console.log('Uploading file to Cloudinary with public_id:', fileName);
+            return fileName;
+        },
+        transformation: [
+            { width: 500, height: 500, crop: "limit" }
+        ]
     }
 });
 
 const imageFilter = (req, file, cb) => {
+    console.log('Image filter checking file:', file.originalname);
     const allowedExtensions = /\.(jpg|jpeg|png|gif|webp|bmp|tiff|svg|jfif|heic|avif)$/i;
     if (!allowedExtensions.test(file.originalname)) {
+        console.log('File rejected - invalid extension:', file.originalname);
         return cb(
             new Error(
                 "Only image files are allowed (jpg, jpeg, png, gif, webp, bmp, tiff, svg, jfif, heic, avif)."
@@ -84,6 +99,7 @@ const imageFilter = (req, file, cb) => {
             false
         );
     }
+    console.log('File accepted:', file.originalname);
     cb(null, true);
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Row,
@@ -9,71 +9,156 @@ import {
   Nav,
   Tab,
 } from "react-bootstrap";
-import { useAuth } from "../../context/useAuth";
+import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import ordersData from "../../api/orders.json";
-import subscriptionsData from "../../api/subscriptions.json";
-import productsData from "../../api/products.json";
+import { getMe, updateUser as updateUserAPI, updateCoffeePreferences } from "../../api/authApi";
+import { showSuccess, showError } from "../../utils";
 
 const Profile = () => {
-  const { currentUser, updateUser, logout, isLoggedIn } = useAuth();
+  const { user, updateUser, logout, isLoggedIn } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("profile");
   const [isEditing, setIsEditing] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: currentUser?.name || "",
-    email: currentUser?.email || "",
-    phone: currentUser?.phone || "",
-    address: currentUser?.address || "",
-    preferences: {
-      sweetness: currentUser?.preferences?.sweetness || "medium",
-      strength: currentUser?.preferences?.strength || "medium",
-      milk: currentUser?.preferences?.milk || "regular",
-      temperature: currentUser?.preferences?.temperature || "hot",
-    },
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    sweetnessLevel: "Medium",
+    coffeeStrength: "Medium",
+    milkPreference: "Regular Milk",
+    temperature: "Hot",
   });
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user.name || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        address: user.address || "",
+        sweetnessLevel: user.coffeePreferences?.sweetnessLevel || "Medium",
+        coffeeStrength: user.coffeePreferences?.coffeeStrength || "Medium",
+        milkPreference: user.coffeePreferences?.milkPreference || "Regular Milk",
+        temperature: user.coffeePreferences?.temperature || "Hot",
+      });
+    }
+  }, [user]);
 
   if (!isLoggedIn) {
     navigate("/login");
     return null;
   }
 
-  const userOrders = ordersData.filter(
-    (order) => order.userId === currentUser?.id
-  );
-  const userSubscriptions = subscriptionsData.filter(
-    (sub) => sub.userId === currentUser?.id
-  );
+  const avatarSrc = user?.avatar || "/media/user/image.png";
+  
+  const userOrders = [];
+  const userSubscriptions = [];
+  const productsData = [];
 
   const getOrderTotal = (order) => {
-    return order.items.reduce((total, item) => {
-      const product = productsData.find((p) => p.id === item.productId);
-      return total + (product ? product.price.regular * item.quantity : 0);
-    }, 0);
+    return order.items?.reduce((total, item) => total + (item.price * item.quantity || 0), 0) || 0;
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name.startsWith("preferences.")) {
-      const prefKey = name.split(".")[1];
-      setFormData((prev) => ({
-        ...prev,
-        preferences: {
-          ...prev.preferences,
-          [prefKey]: value,
-        },
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
     }
   };
 
-  const handleSave = () => {
-    updateUser(formData);
-    setIsEditing(false);
+  const removeSelectedFile = () => {
+    setSelectedFile(null);
+    setPreviewUrl(null);
+  };
+
+  const refreshUserProfile = async () => {
+    try {
+      const response = await getMe();
+      if (response.success) {
+        const userData = response.data.user;
+        updateUser(userData);
+        setFormData({
+          name: userData.name || "",
+          email: userData.email || "",
+          phone: userData.phone || "",
+          address: userData.address || "",
+          sweetnessLevel: userData.coffeePreferences?.sweetnessLevel || "Medium",
+          coffeeStrength: userData.coffeePreferences?.coffeeStrength || "Medium",
+          milkPreference: userData.coffeePreferences?.milkPreference || "Regular Milk",
+          temperature: userData.coffeePreferences?.temperature || "Hot",
+        });
+      }
+    } catch (error) {
+      console.error("Error refreshing user profile:", error);
+    }
+  };
+
+  const handleSaveProfile = async () => {
+    setIsLoading(true);
+    try {
+      let updateResponse;
+      
+      const baseData = {
+        name: formData.name,
+        phone: formData.phone,
+        address: formData.address,
+      };
+      
+      if (selectedFile) {
+        const formDataForUpload = new FormData();
+        formDataForUpload.append('name', formData.name);
+        formDataForUpload.append('phone', formData.phone);
+        formDataForUpload.append('address', formData.address);
+        formDataForUpload.append('avatar', selectedFile);
+        
+        console.log('Uploading with file:', selectedFile.name);
+        updateResponse = await updateUserAPI(formDataForUpload);
+      } else {
+        console.log('Updating without file');
+        updateResponse = await updateUserAPI(baseData);
+      }
+      
+      if (updateResponse.success) {
+        const preferencesData = {
+          sweetnessLevel: formData.sweetnessLevel,
+          coffeeStrength: formData.coffeeStrength,
+          milkPreference: formData.milkPreference,
+          temperature: formData.temperature,
+        };
+        
+        await updateCoffeePreferences(preferencesData);
+        
+        await refreshUserProfile();
+        
+        setIsEditing(false);
+        removeSelectedFile();
+        showSuccess("Profile updated successfully");
+      }
+    } catch (error) {
+      console.error("Profile update error:", error);
+      const errorMessage = error.response?.data?.message || error.message || "Failed to update profile";
+      showError(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSave = async () => {
+    await handleSaveProfile();
   };
 
   const handleLogout = () => {
@@ -120,24 +205,57 @@ const Profile = () => {
               <Card className="shadow-sm">
                 <Card.Body className="text-center">
                   <div
-                    className="profile-avatar mb-3"
+                    className="profile-avatar mb-3 position-relative"
                     style={{
                       width: "80px",
                       height: "80px",
-                      background: "var(--color-primary)",
                       borderRadius: "50%",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: "2rem",
-                      color: "white",
                       margin: "0 auto",
+                      overflow: "hidden",
+                      backgroundColor: "#f8f9fa",
                     }}
                   >
-                    {currentUser?.name?.charAt(0).toUpperCase()}
+                    <img 
+                      src={previewUrl || avatarSrc}
+                      alt={user?.name || "User"}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      onError={(e) => {
+                        e.target.src = "/media/user/image.png";
+                      }}
+                    />
+                    {isEditing && (
+                      <>
+                        <div 
+                          className="position-absolute top-0 end-0 bg-primary rounded-circle d-flex align-items-center justify-content-center"
+                          style={{ width: "24px", height: "24px", cursor: "pointer" }}
+                          onClick={() => document.getElementById('avatar-upload').click()}
+                        >
+                          <i className="bi bi-camera text-white" style={{ fontSize: "12px" }}></i>
+                        </div>
+                        <input
+                          type="file"
+                          id="avatar-upload"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          style={{ display: "none" }}
+                        />
+                        {selectedFile && (
+                          <div 
+                            className="position-absolute top-0 start-0 bg-danger rounded-circle d-flex align-items-center justify-content-center"
+                            style={{ width: "20px", height: "20px", cursor: "pointer" }}
+                            onClick={removeSelectedFile}
+                          >
+                            <i className="bi bi-x text-white" style={{ fontSize: "12px" }}></i>
+                          </div>
+                        )}
+                      </>
+                    )}
                   </div>
-                  <h5 className="mb-1">{currentUser?.name}</h5>
-                  <p className="text-muted small">{currentUser?.email}</p>
+                  <h5 className="mb-1">{user?.name}</h5>
+                  <p className="text-muted small">{user?.email}</p>
                   <Button
                     variant="outline-danger"
                     size="sm"
@@ -216,24 +334,24 @@ const Profile = () => {
                       {!isEditing ? (
                         <Row>
                           <Col md={6} className="mb-3">
-                            <strong>Name:</strong> {currentUser?.name}
+                            <strong>Name:</strong> {user?.name}
                           </Col>
                           <Col md={6} className="mb-3">
-                            <strong>Email:</strong> {currentUser?.email}
+                            <strong>Email:</strong> {user?.email}
                           </Col>
                           <Col md={6} className="mb-3">
                             <strong>Phone:</strong>{" "}
-                            {currentUser?.phone || "Not provided"}
+                            {user?.phone || "Not provided"}
                           </Col>
                           <Col md={6} className="mb-3">
                             <strong>Member Since:</strong>{" "}
                             {new Date(
-                              currentUser?.createdAt
+                              user?.createdAt
                             ).toLocaleDateString()}
                           </Col>
                           <Col xs={12}>
                             <strong>Address:</strong>{" "}
-                            {currentUser?.address || "Not provided"}
+                            {user?.address || "Not provided"}
                           </Col>
                         </Row>
                       ) : (
@@ -431,8 +549,8 @@ const Profile = () => {
                             <Form.Group>
                               <Form.Label>Sweetness Level</Form.Label>
                               <Form.Select
-                                name="preferences.sweetness"
-                                value={formData.preferences.sweetness}
+                                name="sweetnessLevel"
+                                value={formData.sweetnessLevel}
                                 onChange={handleInputChange}
                               >
                                 <option value="none">No Sugar</option>
@@ -446,8 +564,8 @@ const Profile = () => {
                             <Form.Group>
                               <Form.Label>Coffee Strength</Form.Label>
                               <Form.Select
-                                name="preferences.strength"
-                                value={formData.preferences.strength}
+                                name="coffeeStrength"
+                                value={formData.coffeeStrength}
                                 onChange={handleInputChange}
                               >
                                 <option value="mild">Mild</option>
@@ -460,8 +578,8 @@ const Profile = () => {
                             <Form.Group>
                               <Form.Label>Milk Preference</Form.Label>
                               <Form.Select
-                                name="preferences.milk"
-                                value={formData.preferences.milk}
+                                name="milkPreference"
+                                value={formData.milkPreference}
                                 onChange={handleInputChange}
                               >
                                 <option value="none">No Milk</option>
@@ -476,8 +594,8 @@ const Profile = () => {
                             <Form.Group>
                               <Form.Label>Temperature</Form.Label>
                               <Form.Select
-                                name="preferences.temperature"
-                                value={formData.preferences.temperature}
+                                name="temperature"
+                                value={formData.temperature}
                                 onChange={handleInputChange}
                               >
                                 <option value="hot">Hot</option>

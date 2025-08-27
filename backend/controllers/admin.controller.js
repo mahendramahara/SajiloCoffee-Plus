@@ -129,7 +129,7 @@ export const loginAdmin = async (req, res) => {
     });
     
     return success(res, { 
-        token, 
+        accessToken: token, 
         admin: {
             id: admin._id,
             name: admin.name,
@@ -142,6 +142,20 @@ export const loginAdmin = async (req, res) => {
   } catch (err) {
     console.error("Error logging in admin:", err);
     return error(res, "Failed to log in admin", 500);
+  }
+};
+
+export const getMe = async (req, res) => {
+  try {
+    const admin = await Admin.findById(req.user.id).select('-salt -hashedPassword');
+    if (!admin) {
+      return error(res, "Admin not found", 404);
+    }
+    
+    return success(res, { admin }, "Admin profile retrieved successfully");
+  } catch (err) {
+    console.error("Error getting admin profile:", err);
+    return error(res, "Failed to get admin profile", 500);
   }
 };
 

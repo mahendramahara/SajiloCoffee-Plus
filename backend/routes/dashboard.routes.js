@@ -1,12 +1,12 @@
-import { Router } from 'express';
+import express from 'express';
 import {
   getDashboardStats,
   getUserDashboard,
   getSalesAnalytics
 } from '../controllers/dashboard.controller.js';
-import { verifyJWT, verifyUser, verifyAdmin } from '../middlewares/auth.js';
+import { verifyJWT, verifyAdmin, verifyUser } from '../middlewares/auth.js';
 
-const router = Router();
+const router = express.Router();
 
 router.get('/admin', verifyJWT, verifyAdmin, getDashboardStats);
 router.get('/user', verifyJWT, verifyUser, getUserDashboard);

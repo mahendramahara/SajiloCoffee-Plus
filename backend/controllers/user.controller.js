@@ -23,7 +23,7 @@ export const register = async (req, res) => {
             return validation(res, 'Validation failed', errors.array());
         }
 
-        const { name, email, password } = req.body;
+        const { name, email, password, sweetnessLevel, coffeeStrength, milkPreference, temperature } = req.body;
 
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -34,7 +34,17 @@ export const register = async (req, res) => {
         let savedUser;
         
         await session.withTransaction(async () => {
-            const user = new User({ name, email, password });
+            const user = new User({ 
+                name, 
+                email, 
+                password,
+                coffeePreferences: {
+                    sweetnessLevel,
+                    coffeeStrength,
+                    milkPreference,
+                    temperature
+                }
+            });
             await user.save({ session });
             savedUser = user;
 
@@ -56,7 +66,8 @@ export const register = async (req, res) => {
             name: savedUser.name,
             email: savedUser.email,
             isEmailVerified: savedUser.isEmailVerified,
-            createdAt: savedUser.createdAt
+            createdAt: savedUser.createdAt,
+            coffeePreferences: savedUser.coffeePreferences
         };
         
         return success(res, { user: userResponse }, "Registration successful. Please check your email for verification.", 201);
@@ -413,30 +424,49 @@ export const getMe = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
+        console.log('Update user request received');
+        console.log('Request body:', req.body);
+        console.log('Request file:', req.file);
+        
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return validation(res, 'Validation failed', errors.array());
         }
 
         const userId = req.user._id;
-        const updateData = req.body;
+        const updateData = { ...req.body };
 
-        if (req.file) {
+        if (req.file && req.file.path) {
+            console.log('File uploaded to Cloudinary:', req.file.path);
             updateData.avatar = req.file.path;
+        } else {
+            console.log('No file uploaded');
         }
 
         delete updateData.password;
         delete updateData.email;
         delete updateData.role;
+        delete updateData.coffeePreferences;
+
+        Object.keys(updateData).forEach(key => {
+            if (updateData[key] === '' || updateData[key] === null || updateData[key] === undefined || 
+                (typeof updateData[key] === 'object' && Object.keys(updateData[key]).length === 0)) {
+                delete updateData[key];
+            }
+        });
+
+        console.log('Final update data:', updateData);
 
         const user = await User.findByIdAndUpdate(userId, updateData, { new: true }).select('-hashedPassword -salt');
         if (!user) {
             return notFound(res, 'User not found');
         }
 
+        console.log('User updated successfully:', user);
         return success(res, { user }, "User updated successfully");
     } catch (err) {
-        return error(res, 'User update failed', 500);
+        console.error('User update error:', err);
+        return error(res, `User update failed: ${err.message}`, 500);
     }
 };
 
@@ -461,4 +491,23 @@ export const logout = async (req, res) => {
     } catch (err) {
         return error(res, 'Logout failed', 500);
     }
+};
+
+export const getCoffeePreferences = async (req, res) => {
+    const userId = req.user._id;
+    const user = await User.findById(userId).select('coffeePreferences');
+    if (!user) {
+        return error(res, 'User not found', 404);
+    }
+    return success(res, { coffeePreferences: user.coffeePreferences }, "Coffee preferences retrieved successfully");
+};
+
+export const updateCoffeePreferences = async (req, res) => {
+    const userId = req.user._id;
+    const update = { coffeePreferences: req.body };
+    const user = await User.findByIdAndUpdate(userId, update, { new: true }).select('coffeePreferences');
+    if (!user) {
+        return error(res, 'User not found', 404);
+    }
+    return success(res, { coffeePreferences: user.coffeePreferences }, "Coffee preferences updated successfully");
 };

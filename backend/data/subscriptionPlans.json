@@ -1,0 +1,188 @@
+[
+  {
+    "name": "Himalayan Coffee Lover",
+    "description": "Perfect monthly plan for casual coffee drinkers who love Nepali coffee culture",
+    "cycle": "monthly",
+    "duration": 30,
+    "price": 1200,
+    "originalPrice": 1500,
+    "currency": "NPR",
+    "features": [
+      {
+        "name": "Monthly Coffee Delivery",
+        "description": "300g premium Nepali coffee beans delivered monthly",
+        "included": true
+      },
+      {
+        "name": "Basic Support",
+        "description": "Email support for all coffee queries",
+        "included": true
+      },
+      {
+        "name": "Coffee Brewing Guide",
+        "description": "Traditional Nepali brewing methods guide",
+        "included": true
+      }
+    ],
+    "perks": {
+      "freePowderGrams": 300,
+      "indoorVisitsPerMonth": 3,
+      "privateSpaceHours": 0,
+      "discountPercentage": 8,
+      "freeDelivery": true,
+      "prioritySupport": false,
+      "exclusiveProducts": false
+    },
+    "popular": false,
+    "active": true,
+    "savingsPercentVsMonthly": 0,
+    "tags": ["starter", "monthly", "nepali-coffee"]
+  },
+  {
+    "name": "Everest Coffee Enthusiast",
+    "description": "Great quarterly plan for regular coffee drinkers who appreciate premium quality",
+    "cycle": "3-month",
+    "duration": 90,
+    "price": 3200,
+    "originalPrice": 4500,
+    "currency": "NPR",
+    "features": [
+      {
+        "name": "Quarterly Coffee Delivery",
+        "description": "1kg premium high-altitude coffee beans every 3 months",
+        "included": true
+      },
+      {
+        "name": "Priority Support",
+        "description": "Phone and email priority support",
+        "included": true
+      },
+      {
+        "name": "Himalayan Tea Samples",
+        "description": "Monthly samples of premium Nepali teas",
+        "included": true
+      },
+      {
+        "name": "Cafe Membership Card",
+        "description": "Special membership benefits at partner cafes",
+        "included": true
+      }
+    ],
+    "perks": {
+      "freePowderGrams": 1000,
+      "indoorVisitsPerMonth": 5,
+      "privateSpaceHours": 2,
+      "discountPercentage": 12,
+      "freeDelivery": true,
+      "prioritySupport": true,
+      "exclusiveProducts": false
+    },
+    "popular": true,
+    "active": true,
+    "savingsPercentVsMonthly": 28,
+    "tags": ["popular", "quarterly", "premium"]
+  },
+  {
+    "name": "Annapurna Coffee Connoisseur",
+    "description": "Premium 6-month plan for serious coffee connoisseurs who want exclusive access",
+    "cycle": "6-month",
+    "duration": 180,
+    "price": 5800,
+    "originalPrice": 9000,
+    "currency": "NPR",
+    "features": [
+      {
+        "name": "Bi-annual Premium Delivery",
+        "description": "2kg of rare high-altitude Nepali coffee beans every 6 months",
+        "included": true
+      },
+      {
+        "name": "VIP Support",
+        "description": "24/7 dedicated customer support",
+        "included": true
+      },
+      {
+        "name": "Exclusive Coffee Tours",
+        "description": "Access to coffee farm tours in Nepal",
+        "included": true
+      },
+      {
+        "name": "Private Space Access",
+        "description": "4 hours monthly private space at premium locations",
+        "included": true
+      },
+      {
+        "name": "Coffee Masterclass",
+        "description": "Monthly virtual coffee brewing sessions",
+        "included": true
+      }
+    ],
+    "perks": {
+      "freePowderGrams": 2000,
+      "indoorVisitsPerMonth": 8,
+      "privateSpaceHours": 4,
+      "discountPercentage": 18,
+      "freeDelivery": true,
+      "prioritySupport": true,
+      "exclusiveProducts": true
+    },
+    "popular": false,
+    "active": true,
+    "savingsPercentVsMonthly": 35,
+    "tags": ["premium", "connoisseur", "exclusive"]
+  },
+  {
+    "name": "Mount Everest Coffee Master",
+    "description": "Ultimate annual plan for true coffee masters seeking the finest Nepali coffee experience",
+    "cycle": "annual",
+    "duration": 365,
+    "price": 9999,
+    "originalPrice": 18000,
+    "currency": "NPR",
+    "features": [
+      {
+        "name": "Annual Premium Collection",
+        "description": "4kg of the finest single-origin Nepali coffee beans annually",
+        "included": true
+      },
+      {
+        "name": "Personal Coffee Consultant",
+        "description": "Dedicated personal coffee expert and consultant",
+        "included": true
+      },
+      {
+        "name": "Exclusive Coffee Events",
+        "description": "VIP access to all coffee events and tastings in Nepal",
+        "included": true
+      },
+      {
+        "name": "Private Roastery Tours",
+        "description": "Exclusive access to private coffee roastery tours",
+        "included": true
+      },
+      {
+        "name": "Custom Blends",
+        "description": "Personalized coffee blends created just for you",
+        "included": true
+      },
+      {
+        "name": "Premium Equipment",
+        "description": "Annual coffee equipment and accessories package",
+        "included": true
+      }
+    ],
+    "perks": {
+      "freePowderGrams": 4000,
+      "indoorVisitsPerMonth": 15,
+      "privateSpaceHours": 8,
+      "discountPercentage": 25,
+      "freeDelivery": true,
+      "prioritySupport": true,
+      "exclusiveProducts": true
+    },
+    "popular": false,
+    "active": true,
+    "savingsPercentVsMonthly": 44,
+    "tags": ["ultimate", "master", "luxury", "custom"]
+  }
+]

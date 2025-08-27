@@ -12,7 +12,9 @@ import {
     getMe, 
     updateUser, 
     deleteUser, 
-    logout 
+    logout,
+    getCoffeePreferences,
+    updateCoffeePreferences
 } from '../controllers/user.controller.js';
 import { 
     registerValidation,
@@ -44,5 +46,7 @@ router.get('/me', verifyJWT, verifyUser, getMe);
 router.put('/update', verifyJWT, verifyUser, upload.single('avatar'), updateUserValidation, updateUser);
 router.delete('/delete', verifyJWT, verifyUser, deleteUser);
 router.post('/logout', verifyJWT, verifyUser, logout);
+router.get('/coffee-preferences', verifyJWT, verifyUser, getCoffeePreferences);
+router.put('/coffee-preferences', verifyJWT, verifyUser, updateCoffeePreferences);
 
 export default router;
